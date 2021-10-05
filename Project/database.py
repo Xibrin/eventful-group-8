@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
-import mysql
 
 
 class Database(ABC):
+
+    def __init__(self, table):
+        self.table = table
 
     @abstractmethod
     def add(self, to_add):

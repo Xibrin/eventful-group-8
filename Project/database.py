@@ -1,20 +1,21 @@
+from abc import ABC, abstractmethod
 import mysql
-from user
-from abc import ABCMeta, abstractmethod
 
-class Database(metaclass= ABCMeta):
+
+class Database(ABC):
 
     @abstractmethod
-    def add(self):
+    def add(self, to_add):
         pass
+
     @abstractmethod
     def get(self):
         pass
+
     @abstractmethod
     def update(self):
         pass
+
     @abstractmethod
-    def delete(self):
+    def delete(self, to_remove):
         pass
-
-

@@ -24,6 +24,7 @@ class Travel:
         locations = "&from=" + self.start_pos + "&to=" + self.end_pos
         key = os.getenv("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
+
         print(response.json())
         return Route(json.loads(response.text))
 
@@ -35,10 +36,10 @@ class Travel:
         print(response.json())
         return Route(json.loads(response.text))
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     travel = Travel("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
     travel.directions()
     travel.get_tolls()
+
     # ticketmaster()
+

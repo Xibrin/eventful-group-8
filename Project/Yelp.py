@@ -11,7 +11,10 @@ if __name__ == '__main__':
     url = 'https://api.yelp.com/v3/events'
 
     # In the dictionary, term can take values like food, cafes or businesses like McDonalds
-    params = {'location': '9E 33rd Baltimore, Maryland', 'limit': 50, 'start_date': }
+
+    d = datetime.utcnow()
+    unixtime = calendar.timegm(d.utctimetuple())
+    params = {'location': '9E 33rd Baltimore, Maryland', 'limit': 50, 'start_date': unixtime}
 
     # Making a get request to the API
     req = requests.get(url, params=params, headers=headers)
@@ -20,8 +23,5 @@ if __name__ == '__main__':
     print('The status code is {}'.format(req.status_code))
 
     # printing the text from the response
-    d = datetime.utcnow()
-    unixtime = calendar.timegm(d.utctimetuple())
-    print(unixtime)
-    #print(json.loads(req.text))
+    print(json.loads(req.text))
 

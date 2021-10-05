@@ -10,16 +10,38 @@ import os
 #     response = requests.get(base_url + key)
 #     print(response.json())
 
+class Travel:
 
-def directions(startPos, endPos):
-    base_url = "http://open.mapquestapi.com/directions/v2/route?key="
-    locations = "&from=" + startPos + "&to=" + endPos
-    key = os.getenv("MAPQUEST_API_KEY")
-    response = requests.get(base_url + key + locations)
-    print(response.json())
+    def __init__(self, start_pos, end_pos):
+        self.start_pos = start_pos
+        self.end_pos = end_pos
+        self.route = None
+
+    def directions(self, start_pos, end_pos):
+        base_url = "http://open.mapquestapi.com/directions/v2/route?key="
+        locations = "&from=" + start_pos + "&to=" + end_pos
+        key = os.getenv("MAPQUEST_API_KEY")
+        response = requests.get(base_url + key + locations)
+        print(response.json())
+        self.route = response.json()
+        return response.json()
+
+    def createRoute(self):
+        #use helper methods (or not depending on ease of implementation) to parse the directions into a route object
+
+    #Helper Methods
+    def get_fuel_cost(self):
+        #parse Json to get fuel cost
+
+    def get_distance(self):
+        #parse Json to get distance
+
+    def get_time(self):
+        #parse Json to get time
+
 
 
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    directions("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
+    if __name__ == '__main__':
+        directions("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
     # ticketmaster()

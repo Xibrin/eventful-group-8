@@ -10,7 +10,6 @@ import os
 #     response = requests.get(base_url + key)
 #     print(response.json())
 
-
 def directions(startPos, endPos):
     base_url = "http://open.mapquestapi.com/directions/v2/route?key="
     locations = "&from=" + startPos + "&to=" + endPos

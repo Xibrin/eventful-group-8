@@ -9,9 +9,9 @@ class Travel:
         self.end_pos = end_pos
         self.route = None
 
-    def directions(self, start_pos, end_pos):
+    def directions(self):
         base_url = "https://open.mapquestapi.com/directions/v2/route?key="
-        locations = "&from=" + start_pos + "&to=" + end_pos
+        locations = "&from=" + self.start_pos + "&to=" + self.end_pos
         key = os.getenv("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
         print(response.json())
@@ -39,5 +39,5 @@ class Travel:
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     travel = Travel("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
-    travel.directions("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
+    travel.directions()
     # ticketmaster()

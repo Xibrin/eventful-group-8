@@ -1,7 +1,7 @@
 # This is a sample Python script.
 import requests
 import os
-import event_finder
+
 
 class Travel:
     def __init__(self, start_pos, end_pos):
@@ -14,11 +14,11 @@ class Travel:
         locations = "&from=" + self.start_pos + "&to=" + self.end_pos
         key = os.getenv("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
-        print(response.json())
-        self.route = response.json()
-        return response.json()
+        route = response.json()
+        self.route = route
+        return route
 
-    def createRoute(self):
+    def create_route(self):
         # use helper methods (or not depending on ease of implementation) to parse the directions into a route object
         pass
 
@@ -36,8 +36,6 @@ class Travel:
         pass
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     travel = Travel("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
     travel.directions()
-    # ticketmaster()

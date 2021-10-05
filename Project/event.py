@@ -9,4 +9,3 @@ class Event:
         self.info = info
         self.price = price
         self.outdoor = outdoor
-

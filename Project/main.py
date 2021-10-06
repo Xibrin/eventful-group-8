@@ -3,6 +3,7 @@ from datetime import datetime
 import calendar
 from Yelp import Yelp
 from travel import Travel
+import mysql.connector
 
 if __name__ == '__main__':
     travel = Travel("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")

@@ -1,5 +1,5 @@
 import database
-import mysql
+import mysql.connector
 
 
 class UserDatabase(database.Database):

@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import mysql.connector
 
 
 class Database(ABC):

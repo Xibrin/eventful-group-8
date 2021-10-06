@@ -6,7 +6,7 @@ class Schedule:
 
 
     def create_recommendations(self):
-        # creates recommendations for a block of time: Event A vs Event B vs Event C
+        # creates recommendations for a block of time: Event A vs Event B vs Event C; returns top n ranks
         pass
 
     def create_schedule(self, event_list):

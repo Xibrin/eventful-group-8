@@ -4,24 +4,32 @@ import os
 from datetime import datetime
 import calendar
 
+class Yelp:
 
-if __name__ == '__main__':
-    headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
+    def __init__(self, start_time, location):
+        self.start_time = start_time
+        self.location = location
 
-    url = 'https://api.yelp.com/v3/events'
+    def get_events(self):
+        headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
 
-    # In the dictionary, term can take values like food, cafes or businesses like McDonalds
+        url = 'https://api.yelp.com/v3/events'
 
-    d = datetime.utcnow()
-    unixtime = calendar.timegm(d.utctimetuple())
-    params = {'location': '9E 33rd Baltimore, Maryland', 'limit': 50, 'start_date': unixtime}
+        # In the dictionary, term can take values like food, cafes or businesses like McDonalds
 
-    # Making a get request to the API
-    req = requests.get(url, params=params, headers=headers)
+        #d = datetime.utcnow()
+        #unixtime = calendar.timegm(d.utctimetuple())
+        params = {'location': self.location, 'limit': 50, 'start_date': self.start_time}
 
-    # proceed only if the status code is 200
-    print('The status code is {}'.format(req.status_code))
+        # Making a get request to the API
+        req = requests.get(url, params=params, headers=headers)
 
-    # printing the text from the response
-    print(json.loads(req.text))
+        # proceed only if the status code is 200
+        print('The status code is {}'.format(req.status_code))
+
+        # printing the text from the response
+        to_print = json.loads(req.text)
+        print(to_print)
+
+        return to_print
 

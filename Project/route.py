@@ -9,7 +9,6 @@ class Route:
         self.time = directions["route"]["time"]
         self.fuel_use = directions["route"]["fuelUsed"]
         # self.start_lng = directions["route"][]
-        # self.end_pos = end_pos
 
     # Helper Methods
     def calculate_fuel_cost(self):

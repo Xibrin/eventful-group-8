@@ -16,7 +16,7 @@ class Travel:
         self.location_list = location_list
         self.route = None
         if start_pos is not None:
-            self.route = self.directions()
+            self.route = self.get_map_response()
         elif location_list is not None:
             self.route = self.optimized_directions()
         else:
@@ -39,36 +39,8 @@ class Travel:
         print(response.json())
         return Route(json.loads(response.text))
 
-    #def create_route(self):
-    #    # use helper methods (or not depending on ease of implementation) to parse the directions into a route object
-    #    json_map = self.get_map_response()
-    #    route = Route(self.start_pos, self.end_pos, 0, 0, 0, 0)
-    #    route.end_pos = self.end_pos
-    #    route.start_pos = self.start_pos
-    #    route.distance = json_map.route.distance
-    #    route.cost = json_map.cost
-    #    route.time = json_map.time
-    #    route.means = json_map.means
-    #    return route
-
-    # Helper Methods
-    #def get_fuel_cost(self):
-    #    # parse Json to get fuel cost
-    #    route = self.create_route()
-    #    return route.cost
-
-    #def get_distance(self):
-    #    route = self.create_route()
-    #    return route.distance
-
-    #def get_time(self):
-    #    route = self.create_route()
-    #    return route.time
-
-
-
 
 if __name__ == '__main__':
     travel = Travel("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
     travel.get_map_response()
-    travel.create_route()
+

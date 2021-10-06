@@ -1,5 +1,4 @@
 # This is a sample Python script.
-
 from datetime import datetime
 import calendar
 from Yelp import Yelp

@@ -13,23 +13,26 @@ People who find it hard to schedule out things to do within a period of time (ac
 It would be interesting to design a piece of software that combines looking for local events to go to, recommending events based on how convenient (and how costly) it would be to get there (ex: it only recommends local concerts that you can easily reach by taking a local bus rather than concerts far away that would force you to Uber/drive, etc.), and offering a recommended itinerary for longer periods of time (Ex: offering you an itinerary for things to do on your day off).
 
 ### Must Have:
-As a someone trying to find new activities to do, I want to be able to view local events so that I can learn about things I am interested in attending.
-As a user of the app, I want to be able to get all events in a certain time frame
-As a user of the app, I want to be able to sort events by date because then I can better schedule my time /ability to go to these events.
-As a user of the app, I want to be able to sort local events/happenings by category because this would allow me to narrow down things I am interested in.
-As a user of the app, I want recommendations for a set of events within a given time frame that I provide
-As a user who is limited in time, I want a set of recommendations which account for travel time and distance
+- As a someone trying to find new activities to do, I want to be able to view local events so that I can learn about things I am interested in attending.
+- As a user of the app who enjoys Yelp, I want to be able to get all events in a certain time frame
+- As a user of the app who enjoys TicketMaster, I want to be able to get all events in a certain time frame
+- As a user of the app who also uses Yelp and just wants to browse, I want to be able to get all events at a certain location after a certain date
+- As a user of the app who also uses TicketMaster and just wants to browse, I want to be able to get all events at a certain location after a certain date
+- As a user of the app, I want to be able to sort events by date because then I can better schedule my time /ability to go to these events.
+- As a user of the app, I want to be able to sort local events/happenings by category because this would allow me to narrow down things I am interested in.
+- As a user of the app, I want recommendations for a set of events within a given time frame that I provide
+- As a user who is limited in time, I want a set of recommendations which account for travel time and distance
 
 
 
 ### Nice to Have:
-As a user who struggles with planning out an itinerary, I want the app to give me a recommended itinerary based on things I’m interested in, transportation options, and time limitations (when things are opened/closed, how much time I have, etc.)
-As a user of the app, I want to be able to integrate my calendar so that only events that fit into my schedule will be recommended.
-As a user of the app, I want to be able to see local transportation options to and from these events because this would help me in being able to go to these events.
-As a budget-conscious user of this app, I want to be able to sort local transportation options by cost because this would allow me to evaluate the cost of my trip.
-As a user of the app, I want a sign/log in so that I can save events I like for easier time finding in the future
-As a practical user of the app, I want local weather to affect the recommendations I get from the app
-As a social user of the app, I want to be able to use this app with a group of friends and get recommendations for all of us
+- As a user who struggles with planning out an itinerary, I want the app to give me a recommended itinerary based on things I’m interested in, transportation options, and time limitations (when things are opened/closed, how much time I have, etc.)
+- As a user of the app, I want to be able to integrate my calendar so that only events that fit into my schedule will be recommended.
+- As a user of the app, I want to be able to see local transportation options to and from these events because this would help me in being able to go to these events.
+- As a budget-conscious user of this app, I want to be able to sort local transportation options by cost because this would allow me to evaluate the cost of my trip.
+- As a user of the app, I want a sign/log in so that I can save events I like for easier time finding in the future
+- As a practical user of the app, I want local weather to affect the recommendations I get from the app
+- As a social user of the app, I want to be able to use this app with a group of friends and get recommendations for all of us
 
 
 ### Software Architecture:

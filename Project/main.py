@@ -13,7 +13,7 @@ if __name__ == '__main__':
     unixtime = calendar.timegm(d.utctimetuple())
     find = Yelp(unixtime, '9E 33rd Baltimore, Maryland')
 
-    connection = mysql.connector.connect(user="root", password=os.getenv("MYSQL_PASSWORD"))
+    connection = mysql.connector.connect(user=os.getenv("MYSQL_USERNAME"), password=os.getenv("MYSQL_PASSWORD"))
     cursor = connection.cursor()
 
     print(connection.is_connected())

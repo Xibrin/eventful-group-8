@@ -1,4 +1,5 @@
 # This is a sample Python script.
+import os
 from datetime import datetime
 import calendar
 from Yelp import Yelp
@@ -11,3 +12,8 @@ if __name__ == '__main__':
     d = datetime.utcnow()
     unixtime = calendar.timegm(d.utctimetuple())
     find = Yelp(unixtime, '9E 33rd Baltimore, Maryland')
+
+    connection = mysql.connector.connect(user="root", password=os.getenv("MYSQL_PASSWORD"))
+    cursor = connection.cursor()
+
+    print(connection.is_connected())

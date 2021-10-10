@@ -10,7 +10,10 @@ class EventDatabase(database.Database):
             raise RuntimeError()
         else:
             EventDatabase.__class_instance = self
-            super().__init__(table)
+            super().__init__()
+            self.table = table
+            # TODO: Add statement to CREATE table IF NOT EXISTS
+            super().close()
 
     def add(self, event):
         return
@@ -23,3 +26,4 @@ class EventDatabase(database.Database):
 
     def delete(self, event):
         return
+

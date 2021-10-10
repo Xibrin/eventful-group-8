@@ -10,7 +10,10 @@ class UserDatabase(database.Database):
             raise RuntimeError()
         else:
             UserDatabase.__class_instance = self
-            super().__init__(table)
+            super().__init__()
+            self.table = table
+            # TODO: Add statement to CREATE table IF NOT EXISTS
+            super().close()
 
     def add(self, user):
         return

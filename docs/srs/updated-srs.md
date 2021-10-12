@@ -22,10 +22,13 @@ It would be interesting to design a piece of software that combines looking for 
 - As a user of the app, I want to be able to sort local events/happenings by category because this would allow me to narrow down things I am interested in.
 - As a user of the app, I want recommendations for a set of events within a given time frame that I provide
 - As a user who is limited in time, I want a set of recommendations which account for travel time and distance
+- As a user with an account, I want some kind of encryption for the passwords I provide
 
 
 
 ### Nice to Have:
+- As a user who frequents the site, I want some kind of cache so that searches I frequently make take less time to process
+- As a user who cares about personalization, I want the recommendations to be personalized to me and I want control over how the recommendations are tailored
 - As a user who struggles with planning out an itinerary, I want the app to give me a recommended itinerary based on things I’m interested in, transportation options, and time limitations (when things are opened/closed, how much time I have, etc.)
 - As a user of the app, I want to be able to integrate my calendar so that only events that fit into my schedule will be recommended.
 - As a user of the app, I want to be able to see local transportation options to and from these events because this would help me in being able to go to these events.

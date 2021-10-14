@@ -1,7 +1,10 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from rest_framework import generics, status
+from .serializers import TodoSerializer
 
+from .models import Todo
 
 # Create your views here.
-def index(request):
-    return render(request, "scheduler/index.html")
+class TodoListView(generics.ListAPIView):
+    model = Todo
+    serializer_class = TodoSerializer

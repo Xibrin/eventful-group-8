@@ -19,10 +19,12 @@ class Yelp:
 
         #d = datetime.utcnow()
         #unixtime = calendar.timegm(d.utctimetuple())
-        params = {'location': self.location, 'limit': 50, 'start_date': self.start_time}
+        for i in range(10):
+            params = {'location': self.location, 'limit': 50, 'offset': i*50, 'start_date': self.start_time}
+            # Making a get request to the API
+            req = requests.get(url, params=params, headers=headers)
 
-        # Making a get request to the API
-        req = requests.get(url, params=params, headers=headers)
+
 
         # proceed only if the status code is 200
         print('The status code is {}'.format(req.status_code))

@@ -13,3 +13,4 @@ if __name__ == '__main__':
     d = datetime.utcnow()
     unixtime = calendar.timegm(d.utctimetuple())
     find = Yelp(unixtime, '9E 33rd Baltimore, Maryland')
+    find.get_events()

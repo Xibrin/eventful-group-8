@@ -28,14 +28,20 @@ class Travel:
         key = os.getenv("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
         print(response.json())
+
+        #Return Route object
         return route.Route(json.loads(response.text))
 
+    def get_travel_time(self):
+        return Travel.get_map_response().time
     def optimized_directions(self):
         base_url = "https://open.mapquestapi.com/directions/v2/optimizedroute?key="
         locations = "&json=" + self.location_list
         key = os.getenv("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
         print(response.json())
+
+        #Return Route object
         return route.Route(json.loads(response.text))
 
     #def create_route(self):

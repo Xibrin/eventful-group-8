@@ -1,3 +1,9 @@
+from eventPlanner.support.location import Location
+from datetime import datetime
+import calendar
+from eventPlanner.support.Yelp import Yelp
+from eventPlanner.support.travel import Travel
+from eventPlanner.support.event import eventStorage
 
 class Schedule:
 
@@ -23,3 +29,21 @@ class Schedule:
         # compare 2 events based on user preferences and determine which one is better
         pass
 
+    # Finds events with a given start time and end time that accounts for transportation
+    # commute_ratio, the ratio of commute_time:time_available; eventually maybe should be function
+    # start_time and end_time in unix timestamp
+    def find_events(self, start_time, end_time, start_pos, commute_ratio = 0.25):
+        duration = start_time - end_time
+        commute_time = duration*commute_ratio
+
+        yao = Yelp()
+
+        event_list = Yelp.parse_events(location.state, start_time + commute_time)
+        possible = []
+        for event in event_list:
+            travel = Travel(start_pos, event.location.display)
+            travel_time = travel.get_travel_time()
+            if travel_time < commute_time:
+                possible.append(event)
+
+        return possible

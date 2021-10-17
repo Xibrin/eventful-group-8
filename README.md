@@ -7,4 +7,4 @@ Currently, to use our app (limited to the first iteration), the user must create
 For this iteration, we apologize that we have not yet created a front-end / user-friendly interface for any of our currently implemented features. Thanks!
 
 # If not every installed, install:
-pip install python-dateutil
+pip install python-dateutil (note: you may need to specify which python version you want to install python-dateutil on. For example, in my case, I was running Python3.10. So I did python3.10 -m pip install python-dateutil)

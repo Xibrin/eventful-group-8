@@ -52,4 +52,10 @@ Next, run
 
 `cd ..` to return to the root directory, eventPlanner
 
-Finally, running `python manage.py runserver` will start up the server. Click on the provided link to open the localhost server.
+Finally, run the following commands:
+
+`python manage.py makemigrations` (Commit the latest changes made to the databases)
+
+`python manage.py migrate` (Push the latest changes to the databases)
+
+`python manage.py runserver` (Start up the localhost server, Click the provided link.)

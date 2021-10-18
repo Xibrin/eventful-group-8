@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Calendar, TimePicker, Card, Tag, Button} from 'antd';
+import { Link } from "react-router-dom";
 import "./styles/stylesheet.css";
 import basscss from 'basscss/css/basscss.min.css';
 const {CheckableTag} = Tag;
@@ -61,7 +62,7 @@ const SelectDateTimeAndCategory = () => {
                  ))
                 }
                 </Card>
-                <Button className = "mt1 right" type= "primary">Submit</Button>
+                <Button className = "mt1 right" type= "primary"><Link to="/events">Submit</Link></Button>
             </div>
             </>}
         </div>

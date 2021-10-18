@@ -8,9 +8,9 @@ export default function Card(props) {
     const showcard = SelectDateTimeAndCategory.timeRange && SelectDateTimeAndCategory.date && SelectDateTimeAndCategory.selectedTags;
 
   return (
-      <>
-      {showcard && <>
-    <div className="card col col-4" padding="5px">
+      // <>
+      // {showcard && <>
+    <div className="card col col-4 flex" padding="5px">
       <div className="card-header">
         <div className="profile">
           <span className="letter">{props.author[0]}</span>
@@ -24,7 +24,7 @@ export default function Card(props) {
       <img className="card-image" src={food} alt="Logo" />
       <div className="card-text">{props.description}</div>
     </div>
-    </>}
-    </>
+    // </>}
+    // </>
   );
 }

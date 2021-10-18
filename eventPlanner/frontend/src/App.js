@@ -60,15 +60,28 @@ function App() {
           <Route path="/" exact component={() => 
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
             <SelectDateTimeAndCategory />
-            <Card
+            </Content>} />
+          <Route path="/about" exact component={() => <Profile />} />
+          <Route path="/contact" exact component={() => <Contact />} />
+          <Route path="/events" exact component={() => <div> <Card
           author={EventOrganizer}
           title={Event.title}
           date={Event.date}
           description={Event.description}
-        />
-            </Content>} />
-          <Route path="/about" exact component={() => <Profile />} />
-          <Route path="/contact" exact component={() => <Contact />} />
+        /> 
+        <Card
+          author={EventOrganizer}
+          title={Event.title}
+          date={Event.date}
+          description={Event.description}
+        /> 
+        <Card
+          author={EventOrganizer}
+          title={Event.title}
+          date={Event.date}
+          description={Event.description}
+        /> 
+        </div>} />
         </Switch>
       </Router>
       <Footer className = "mt4" style={{ textAlign: 'center' }}>OOSE GROUP 8</Footer>

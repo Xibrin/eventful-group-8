@@ -7,6 +7,7 @@
   border-color: rgb(30, 101, 255);
   border-style: solid;
   transition: 200ms;
+  margin-bottom: 20px;
 }
 
 .card:hover {

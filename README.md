@@ -48,6 +48,22 @@ to generate the build files necessary for the front end to run. If for some reas
 
 to install all the required dependencies.
 
+If you receive an error that states a build cannot be compiled due to 
+
+`./node_modules/basscss/css/basscss.min.css`
+
+run the following command
+
+`npm install basscss@8.0.2`
+
+Once you have the required packages installed, run the command
+
+`npm start`
+
+in order to run the application on a local host in your browser
+
+
+
 Next, run 
 
 `cd ..` to return to the root directory, eventPlanner

@@ -33,25 +33,28 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Profile from "./components/Profile";
 import Contact from "./components/Contact";
-import SelectDateTime from "./components/SelectDateTime";
+import SelectDateTime from "./components/SelectDateTimeAndCategory";
 import { Layout } from "antd";
+import Navbar from "./components/Navbar/Navbar";
+import SelectDateTimeAndCategory from "./components/SelectDateTimeAndCategory";
 const { Header, Content, Footer, Sider } = Layout;
+
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation />
+        <Navbar/>
         <Switch>
           <Route path="/" exact component={() => 
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
-            <SelectDateTime />
+            <SelectDateTimeAndCategory />
             </Content>} />
           <Route path="/about" exact component={() => <Profile />} />
           <Route path="/contact" exact component={() => <Contact />} />
         </Switch>
       </Router>
-      <Footer style={{ textAlign: 'center' }}>OOSE GROUP 8</Footer>
+      <Footer className = "mt4" style={{ textAlign: 'center' }}>OOSE GROUP 8</Footer>
     </div>
   );
 }

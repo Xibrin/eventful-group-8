@@ -10,6 +10,10 @@ For this iteration, we apologize that we have not yet created a front-end / user
 
 pip install python-dateutil (note: you may need to specify which python version you want to install python-dateutil on. For example, in my case, I was running Python3.10. So I did python3.10 -m pip install python-dateutil)
 
+To install the project dependencies, from the root directory, eventPlanner, run the following command (Note that you might need to create a new virtual environment and activate it before installing the packages. For more information, refer to https://docs.python.org/3/tutorial/venv.html):
+
+`pip install -r requirements.txt`
+
 To install the latest version of npm run
 
 `{npm install -g npm}`
@@ -23,3 +27,29 @@ Additionally the following packages:
 `{npm install react-scripts}`
 `{npm install basscss}`
 `{npm install react-router-dom}`
+
+# Running the Program
+
+`cd` into the root directory, `eventPlanner`
+
+If not already activated, activate your virtual environment using `source <environment_name>/bin/activate`
+
+From the root directory, `eventPlanner`, run
+
+`cd frontend` 
+
+to move into the `frontend` directory and run
+
+`npm run build` 
+
+to generate the build files necessary for the front end to run. If for some reason, the build fails ro compile, run 
+
+`npm install` 
+
+to install all the required dependencies.
+
+Next, run 
+
+`cd ..` to return to the root directory, eventPlanner
+
+Finally, running `python manage.py runserver` will start up the server. Click on the provided link to open the localhost server.

@@ -1,11 +1,9 @@
 from django.contrib import admin
 
-from .models import Event
-
+from .models import User
 
 # Register your models here.
-class EventAdmin(admin.ModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     pass
 
-
-admin.site.register(Event, EventAdmin)
+admin.site.register(User, UserAdmin)

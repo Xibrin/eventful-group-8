@@ -7,6 +7,43 @@ import Events from "./Events";
 const { Meta } = Card;
 
 
+function Profile() {
+return (
+    
+<div className="background">
+    <div className="title">
+        Profile
+    </div>
+    <div className="special">
+        <form id="my-form">
+            <div className="heading"> UserFirstName UserLastName </div>
+            <div className="picture mx-auto"> <img src={food} alt={food}/></div>
+            <div className="profileSection">
+                About you:
+            </div>
+            <div className="profileSection">
+                Categories:
+                <div className="categories">
+                    Blah Blah
+                </div>
+                <div className="categories">
+                    Blah Blah
+                </div>
+                <div className="categories">
+                    Blah Blah
+                </div>
+            </div>
+            <div className="profileSection">
+                Saved Location:
+            </div>
+            <div className="profileSection">
+                Schedule
+            </div>
+        </form>
+    </div>
+
+</div>
+);
 
 const Profile = () => {
     return (

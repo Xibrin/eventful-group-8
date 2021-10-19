@@ -1,9 +1,7 @@
-from eventPlanner.support.location import Location
 from datetime import datetime
 import calendar
-from eventPlanner.support.Yelp import Yelp
-from eventPlanner.support.travel import Travel
-from eventPlanner.support.event import eventStorage
+from ..support.yelp import Yelp
+from ..support.travel import Travel
 import math
 # from eventPlanner.support.Yelp import parse_events
 

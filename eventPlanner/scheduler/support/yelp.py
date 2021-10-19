@@ -5,10 +5,9 @@ import json
 import os
 import re
 from datetime import datetime
-import calendar
-import event
-from eventPlanner.support.event import eventStorage
-from eventPlanner.support.location import Location
+
+from ..support.event import eventStorage
+from ..support.location import Location
 from dateutil import parser
 
 

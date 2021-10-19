@@ -1,6 +1,6 @@
 
 from datetime import datetime
-import schedule
+from . import schedule
 
 
 class User:

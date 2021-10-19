@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 import calendar
 from Yelp import Yelp
+from event_finder import EventFinder
 from travel import Travel
 import event_database
 import user_database

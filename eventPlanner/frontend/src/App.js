@@ -55,7 +55,7 @@ function App() {
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
             <SelectDateTimeAndCategory />
             </Content>} />
-          <Route path="/about" exact component={() => <Profile />} />
+          <Route path="/profile" exact component={() => <Profile />} />
           <Route path="/contact" exact component={() => <Contact />} />
           <Route path="/events" exact component={() => 
           <Content style={{ padding: '0 24px 10px 24px ', minHeight: 280, marginBottom: 200}}>

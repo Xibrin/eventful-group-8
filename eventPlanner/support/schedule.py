@@ -1,9 +1,17 @@
+from eventPlanner.support.location import Location
+from datetime import datetime
+import calendar
+from eventPlanner.support.Yelp import Yelp
+from eventPlanner.support.travel import Travel
+from eventPlanner.support.event import eventStorage
+import math
+# from eventPlanner.support.Yelp import parse_events
+
 
 class Schedule:
 
     def __init__(self, filters):
-        self.filters = filters #filters for events
-
+        self.filters = filters  # filters for events
 
     def create_recommendations(self):
         # creates recommendations for a block of time: Event A vs Event B vs Event C; returns top n ranks
@@ -23,3 +31,33 @@ class Schedule:
         # compare 2 events based on user preferences and determine which one is better
         pass
 
+    # Finds events with a given start time and end time that accounts for transportation
+    # commute_ratio, the ratio of commute_time:time_available; eventually maybe should be function
+    # start_time and end_time in unix timestamp
+    @staticmethod
+    def find_events(start_time, end_time, start_pos, commute_ratio=0.25):
+        duration = end_time - start_time
+        commute_time = int(math.ceil(duration * commute_ratio))
+
+        yao = Yelp()
+
+        event_start_time = start_time + commute_time
+
+        print(start_pos)
+        print(event_start_time)
+        event_list = yao.parse_events(start_pos, event_start_time)
+        if event_list is None:
+            return "ERROR"
+        possible = []
+        for event in event_list:
+            travel = Travel(start_pos, event.location.display)
+            travel_time = travel.get_travel_time()
+            if travel_time < commute_time:
+                possible.append(event)
+
+        return possible
+
+    # Function to calculate ideal commute_ratio based on duration; currently logistic though may need to be optimized
+    @staticmethod
+    def commute_ratio(duration, growth_rate, max_ratio):
+        return max_ratio / (1 + math.exp(-growth_rate(duration - 4)))

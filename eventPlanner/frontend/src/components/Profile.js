@@ -8,7 +8,7 @@ import basscss from 'basscss/css/basscss.min.css';
 function Profile() {
 return (
     
-<div className="mx-auto">
+<div className="background">
     <div className="title">
         Profile
     </div>

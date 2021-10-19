@@ -40,6 +40,7 @@ import { Layout } from "antd";
 import Navbar from "./components/Navbar/Navbar";
 import SelectDateTimeAndCategory from "./components/SelectDateTimeAndCategory";
 import Events from './components/Events';
+import LandingPage from "./components/LandingPage";
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -50,10 +51,11 @@ function App() {
       <Router>
         <Navbar/>
         <Switch>
-          <Route path="/" exact component={() => 
+          <Route path="/home" exact component={() => 
           <Content style={{ padding: '0 24px', minHeight: 280 }}>
             <SelectDateTimeAndCategory />
             </Content>} />
+          <Route path="/" exact component={() => <LandingPage />} />
           <Route path="/profile" exact component={() => <Profile />} />
           <Route path="/contact" exact component={() => <Contact />} />
           <Route path="/events" exact component={() => 

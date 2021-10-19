@@ -19,7 +19,7 @@ if __name__ == '__main__':
     end_time = int((datetime(2022, 1, 1) - datetime(1970,1,1)).total_seconds())
     # find = Yelp(unixtime, '9E 33rd Baltimore, Maryland')
     # print(unixtime)
-    print("CUrrent time: " + str(current_time))
+    print("Current time: " + str(current_time))
     print("Start time: " + str(start_time))
     scheduling_alg = Schedule(0)
     possible_events = scheduling_alg.find_events(start_time, end_time, '9E 33rd Baltimore, Maryland')

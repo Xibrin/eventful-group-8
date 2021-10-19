@@ -10,7 +10,7 @@ const sportsList = sports.split(" ");
 
 function onPanelChange(value, mode) {
     console.log(value, mode);
-  }
+}
 
 const format = 'HH:mm';
 

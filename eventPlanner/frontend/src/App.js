@@ -40,6 +40,7 @@ import { Layout } from "antd";
 import Navbar from "./components/Navbar/Navbar";
 import SelectDateTimeAndCategory from "./components/SelectDateTimeAndCategory";
 import Events from './components/Events';
+import basscss from 'basscss/css/basscss.min.css';
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -57,12 +58,12 @@ function App() {
           <Route path="/about" exact component={() => <Profile />} />
           <Route path="/contact" exact component={() => <Contact />} />
           <Route path="/events" exact component={() => 
-          <Content style={{ padding: '0 24px 10px 24px ', minHeight: 280, marginBottom: 100}}>
+          <Content style={{ padding: '0 24px 10px 24px ', minHeight: 280, marginBottom: 200}}>
              <Events />
           </Content>} />   
         </Switch>
       </Router>
-      <Footer className = "mt4" style={{ textAlign: 'center' }}>OOSE GROUP 8</Footer>
+      <Footer  style={{ textAlign: 'center' }}>OOSE GROUP 8</Footer>
     </div>
   );
 }

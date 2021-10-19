@@ -14,7 +14,7 @@ const EventOrganizer = "NFL";
 
 const Events = () => {
     return (
-        <div className = "mt2 mb4 pb4"> 
+        <div className = "mt2 mb8 pb4"> 
         <h1 className = "center">Events</h1>
         <Card
           author={EventOrganizer}

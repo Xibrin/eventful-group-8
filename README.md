@@ -4,8 +4,6 @@
 
 Django
 
-React.js
-
 ## Application Explanation
 
 For this application, a user will be able to search for events based on their location and the amount of free time they have available. We are using the Yelp and Ticketmaster APIs to get a list of available events given the schedule of the user and the Mapquest API to get the route between two locations. As a user of this product, you will be able to have a list of recommended events to attend and be able to see the different transportation modalities and associated costs for the transportation/event. Our recommendation system will prioritize the events based on the user's preferences which include budget, preferred transport and type of event.
@@ -49,46 +47,6 @@ You can receive an API Key for MapQuest and more information at https://develope
 You can receive an API Key for TicketMaster and more information at https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
 
 The api keys should be stored as environmental variables in the project configurations with the names "YELP_API_KEY", "MAPQUEST_API_KEY", and "TICKETMASTER_API_KEY."
-
-Once these steps are completed you can proceed with the following instructions:
-
-`cd` into the root directory, `eventPlanner`
-
-If not already activated, activate your virtual environment using `source <environment_name>/bin/activate`
-
-From the root directory, `eventPlanner`, run
-
-`cd frontend` 
-
-to move into the `frontend` directory and run
-
-`npm run build` 
-
-to generate the build files necessary for the front end to run. If for some reason, the build fails ro compile, run 
-
-`npm install` 
-
-to install all the required dependencies.
-
-If you receive an error that states a build cannot be compiled due to 
-
-`./node_modules/basscss/css/basscss.min.css`
-
-run the following command
-
-`npm install basscss@8.0.2`
-
-Once you have the required packages installed, run the command
-
-`npm start`
-
-in order to run the application on a local host in your browser
-
-
-
-Next, run 
-
-`cd ..` to return to the root directory, eventPlanner
 
 Finally, run the following commands:
 

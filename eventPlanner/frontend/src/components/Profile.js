@@ -12,7 +12,7 @@ const Profile = () => {
           <h3 className = "center mt2">Profile</h3>
         <Card style={{ width: 500, marginTop: 30, marginLeft: "auto", marginRight: "auto"}}>
           <Meta
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random&quot; />"}
+            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
             title="FirstName LastName"
             description="About Me:"
           />

@@ -1,0 +1,48 @@
+section {
+  background-color: aliceblue;
+}
+
+.heading {
+  font-size: 2em;
+  text-align: center;
+}
+
+.special {
+  width: 500px;
+  border: 1px solid grey;
+  padding: 25px;
+  margin: 10px;
+  border-radius: 25px;
+}
+
+.categories {
+  border: 1px solid gray;
+  padding: 3px;
+  margin: 5px;
+  border-radius: 0.2em;
+}
+
+.title {
+  align-items: center;
+  font-size: 2.1em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.profileSection {
+  font-size: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.background {
+  margin: auto;
+  /*background-color: xyz color;*/
+}
+
+.picture {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}

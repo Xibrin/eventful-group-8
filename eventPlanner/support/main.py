@@ -9,6 +9,7 @@ import event_database
 import user_database
 from eventPlanner.support.schedule import Schedule
 from datetime import timezone
+from eventPlanner.support.user import User
 
 if __name__ == '__main__':
     # travel = Travel("9E 33rd Baltimore, Maryland", "107 W 29th St, Baltimore, Maryland")
@@ -21,10 +22,12 @@ if __name__ == '__main__':
     # print(unixtime)
     print("Current time: " + str(current_time))
     print("Start time: " + str(start_time))
+    tester = User(None, None)
+    tester.find_events_naive(19, 10, 2021, 1, 12, 2022, 0, 0, "9E 33rd Baltimore, Maryland", 0, 1, 0)
     scheduling_alg = Schedule(0)
-    possible_events = scheduling_alg.find_events(start_time, end_time, '9E 33rd Baltimore, Maryland')
-    print(possible_events)
-    find = Yelp()
+    # possible_events = scheduling_alg.find_events(start_time, end_time, '9E 33rd Baltimore, Maryland')
+    # print(possible_events)
+    # find = Yelp()
     # find.get_events()
 
     # find.parse_events('9E 33rd Baltimore, Maryland', current_time)

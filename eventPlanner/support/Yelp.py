@@ -53,14 +53,17 @@ class Yelp:
         country = val['location']['country']
         state = val['location']['state']
         display_address = val['location']['display_address']
-        loc = Location(address1, city, zip_code, state, country, display_address)
+        disp = ""
+        for i in display_address:
+            disp += " " + i
+        loc = Location(address1, city, zip_code, state, country, disp)
         tickets = val['tickets_url']
         id = val['id']
         picture = val['image_url']
 
-        print("name:", name)
-        print("starts:", start_time)
-        print("ends:", end_time, "\n")
+        # print("name:", name)
+        # print("starts:", start_time)
+        # print("ends:", end_time, "\n")
         # Currently does not account for timezones --> issue to resolve eventually
         dt_start = parser.parse(start_time)
         uts_start = datetime.timestamp(dt_start)
@@ -74,4 +77,4 @@ class Yelp:
         if price is None:
             price = 0.0
         to_add = eventStorage(name, uts_start, uts_end, loc, category, info, float(price), None, tickets, id, picture)
-        # return to_add
+        return to_add

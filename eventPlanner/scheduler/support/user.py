@@ -1,6 +1,8 @@
 
 from datetime import datetime
-from eventPlanner.support.schedule import Schedule
+import schedule
+
+
 class User:
 
     def __init__(self, name, area):
@@ -28,9 +30,9 @@ class User:
         # current_time = calendar.timegm(d.utctimetuple())
         start_time = int((datetime(start_year, start_month, start_day) - datetime(1970, 1, 1)).total_seconds())
         end_time = int((datetime(end_year, end_month, end_day) - datetime(1970, 1, 1)).total_seconds())
-        print("Current time: " + str(current_time))
+        # print("Current time: " + str(current_time))
         print("Start time: " + str(start_time))
-        scheduling_alg = Schedule(0)
+        scheduling_alg = schedule.Schedule(0)
         possible_events = scheduling_alg.find_events_today(start_time, end_time, loc)
         print(possible_events)
         return possible_events
@@ -44,7 +46,7 @@ class User:
         max_travel_time = 86400 * days + hours * 3600 + 60
         # print("Current time: " + str(current_time))
         print("Start time: " + str(start_time))
-        scheduling_alg = Schedule(0)
+        scheduling_alg = schedule.Schedule(0)
         possible_events = scheduling_alg.find_events_generally(start_time, end_time, loc, max_travel_time)
         print(possible_events)
         return possible_events

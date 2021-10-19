@@ -1,12 +1,15 @@
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .models import User
 
+from .support import user
 
-def user(request):
+
+def user_view(request):
     if request.user.is_authenticated:
         return render(request, "scheduler/user.html", context={
             "user": request.user,
@@ -69,4 +72,16 @@ def register_view(request):
             "successMessage": "Successfully created new user"
         })
     return render(request, "scheduler/register.html")
+
+
+@login_required
+def events_view(request):
+    if request.method == "POST":
+        start_time = request.POST["startTime"]
+        end_time = request.POST["endTime"]
+        address = request.POST["address"]
+        max_commute_time = request.POST["maxCommuteTime"]
+        user_free = user.User(None, None)
+        print(type(start_time))
+    return render(request, "scheduler/events.html")
 

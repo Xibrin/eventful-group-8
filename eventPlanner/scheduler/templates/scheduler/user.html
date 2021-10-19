@@ -5,9 +5,26 @@
 
 {% block body %}
     <h2>Logged in as {{ user.first_name }}</h2>
-    <input type="date" id="startDate">
-    <input type="date" id="endDate">
-    <input type="time" id="startTime">
-    <input type="time" id="endTime">
+<form method="POST" action="{% url 'events' %}">
+    {% csrf_token %}
+    <label for="startTime">Enter a start Date and Time!:</label>
+    <input type="datetime-local" id="startTime">
+    <br>
+    <br>
+    <label for="endTime">Enter an end Date and Time!:</label>
+    <input type="datetime-local" id="endTime">
+    <br>
+    <br>
+    <label for="address">Enter an address!:</label>
     <input type="text" id="address">
+    <br>
+    <br>
+    <label for="maxCommuteTime">Enter how long you want to travel for!:</label>
+    <input type="time" id="maxCommuteTime">
+    <br>
+    <br>
+    <input type="button" value="Find me Events!!">
+
+</form>
+
 {% endblock %}

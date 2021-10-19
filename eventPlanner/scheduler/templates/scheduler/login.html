@@ -1,0 +1,28 @@
+{% extends 'scheduler/layout.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block body %}
+    <h2>Login</h2>
+
+    {% if invalidMessage %}
+        <div class="alert alert-danger" role="alert">{{ invalidMessage }}</div>
+    {% endif %}
+    {% if successMessage %}
+        <div class="alert alert-success" role="alert">{{ successMessage }}</div>
+    {% endif %}
+
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="email" name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+
+    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
+{% endblock %}

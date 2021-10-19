@@ -1,0 +1,34 @@
+{% extends 'scheduler/layout.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h2>Register</h2>
+
+    {% if invalidMessage %}
+        <div class="alert alert-danger" role="alert">{{ invalidMessage }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="text" name="firstName" placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="lastName" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm Password">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+
+    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+{% endblock %}

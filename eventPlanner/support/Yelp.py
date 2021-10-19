@@ -4,19 +4,49 @@ import os
 import re
 from datetime import datetime
 import calendar
+import event
+from eventPlanner.support.event import eventStorage
+from eventPlanner.support.location import Location
+from dateutil import parser
+
+
+
 
 
 class Yelp:
 
-    def __init__(self, start_time, location):
-        self.start_time = start_time
-        self.location = location
+    def __init__(self):
+        pass
+        # self.start_time = start_time
+        # self.location = location
+
+    def parse_events(self, location, start_time):
+        print("\nstarting YELP_API\n")
+        headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
+        limit = 50
+        url = 'https://api.yelp.com/v3/events'
+        event_list = []
+        for i in range(1):
+            params = {'location': location, 'limit': limit, 'offset': i * 50, 'start_date': start_time}
+            # Making a get request to the API
+            req = requests.get(url, params=params, headers=headers)
+            # Split request by event (separated by curly braces)
+            if req.status_code != 200:
+                return None
+            data = req.json()
+
+            print(data['total'])
+            for val in data['events']:
+                event_list.append(Yelp.parse_one_event(val))
+
+        return event_list
 
     def get_events(self):
         print("\nstarting YELP_API\n")
         headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
         limit = 50
         url = 'https://api.yelp.com/v3/events'
+        event_list = []
 
         # In the dictionary, term can take values like food, cafes or businesses like McDonalds
 
@@ -34,6 +64,7 @@ class Yelp:
                 # increment throwaway, print (to ensure all events are read)
                 j = j + 1
                 print(j)
+
                 # look for name of event, and print
                 start = val.find("\"name\"")
                 end = val.find("tickets_url")
@@ -75,3 +106,46 @@ class Yelp:
             print(to_print)
 
         return to_print
+
+    @staticmethod
+    def parse_one_event(val):
+        name = val['name']
+        start_time = val['time_start']
+        end_time = val['time_end']
+        category = val['category']
+        info = val['description']
+        price = val['cost']
+        address1 = val['location']['address1']
+        city = val['location']['city']
+        zip_code = val['location']['zip_code']
+        country = val['location']['country']
+        state = val['location']['state']
+        display_address = val['location']['display_address']
+        loc = Location(address1, city, zip_code, state, country, display_address)
+        tickets = val['tickets_url']
+        id = val['id']
+        picture = val['image_url']
+
+        print(name)
+        print(start_time)
+        print(end_time)
+        #Currently does not account for timezones --> issue to resolve eventually
+        dt_start = parser.parse(start_time)
+        uts_start = datetime.timestamp(dt_start)
+
+        if end_time is not None:
+            dt_end = parser.parse(end_time)
+            uts_end = datetime.timestamp(dt_end)
+        else:
+            uts_end = None
+
+        if price is None:
+            price = 0.0
+        to_add = eventStorage(name, uts_start, uts_end, loc, category, info, float(price), None, tickets, id, picture)
+        # return to_add
+
+
+
+
+
+

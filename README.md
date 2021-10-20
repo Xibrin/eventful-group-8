@@ -43,11 +43,6 @@ Finally, run the following commands:
 
 `python manage.py runserver` (Start up the localhost server, Click the provided link.)
 
-
-## Usage
-![Usage Info](../../../../Desktop/readmeImg.png)
-
-
 ## Roadmap
 * We have accomplished our goal of using the Yelp Api to find events for users based on their desired time frame and location
 * We still have to implement the use of the TicketMaster Api to find a greater range of events to offer to users 

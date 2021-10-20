@@ -59,14 +59,18 @@ Finally, run the following commands from the root directory, eventPlanner:
 
 ## Roadmap
 * We have accomplished our goal of using the Yelp Api to find events for users based on their desired time frame and location
+
 * We still have to implement the use of the TicketMaster Api to find a greater range of events to offer to users 
+
 * We still need to develop a robust recommendation algorithm to offer a comprehensive schedule to users based on their preferences
 
 
 ## Contact
-*If you have any questions or concerns, you can reach the project link at https://github.com/jhu-oose/2021-fall-group-group8.git.
-*If you would like to speak to one of the team members, feel free to email at pnovell1@jhu.edu
+* If you have any questions or concerns, you can reach the project link at https://github.com/jhu-oose/2021-fall-group-group8.git.
+
+* If you would like to speak to one of the team members, feel free to email at pnovell1@jhu.edu
 
 ## Acknowledgements
-*We would like to acknowledge the contributions of each of the team members in coming up with the design of the project and sharing their ideas on how to constantly improve the application.
-*We received assistance by watching publicly available videos of CS50 Introduction to Web Programming with Python and Javascript at Harvard University
+* We would like to acknowledge the contributions of each of the team members in coming up with the design of the project and sharing their ideas on how to constantly improve the application.
+
+* We received assistance by watching publicly available videos of CS50 Introduction to Web Programming with Python and Javascript at Harvard University

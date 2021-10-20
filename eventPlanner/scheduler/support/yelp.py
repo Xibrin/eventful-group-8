@@ -20,7 +20,9 @@ class Yelp:
 
     def parse_events(self, location, start_time):
         print("\nstarting YELP_API\n")
-        headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
+        # headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
+        key = ""  # TODO: INSERT YELP API KEY HERE
+        headers = {'Authorization': 'Bearer %s' % key}
         limit = 50
         url = 'https://api.yelp.com/v3/events'
         event_list = []
@@ -30,6 +32,7 @@ class Yelp:
             req = requests.get(url, params=params, headers=headers)
             # Split request by event (separated by curly braces)
             if req.status_code != 200:
+                print("STATUS CODE: " + str(req.status_code))
                 return None
             data = req.json()
 

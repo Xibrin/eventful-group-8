@@ -44,9 +44,10 @@ class User:
         # current_time = calendar.timegm(d.utctimetuple())
         # start_time = int((datetime(start_year, start_month, start_day) - datetime(1970, 1, 1)).total_seconds())
         # end_time = int((datetime(end_year, end_month, end_day) - datetime(1970, 1, 1)).total_seconds())
-        start = parser.isoparse(start_time).timestamp()
+
+        start = int((parser.isoparse(start_time) - datetime(1970, 1, 1)).total_seconds())
         print(start)
-        end = parser.isoparse(start_time).timestamp()
+        end = int((parser.isoparse(end_time) - datetime(1970, 1, 1)).total_seconds())
         max_travel_time = 86400 * days + hours * 3600 + 60
         # print("Current time: " + str(current_time))
         print("Start time: " + str(start_time))

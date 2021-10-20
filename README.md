@@ -33,7 +33,9 @@ You can receive an API Key for MapQuest and more information at https://develope
 
 You can receive an API Key for TicketMaster and more information at https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
 
-The api keys should be stored as environmental variables in the project configurations with the names "YELP_API_KEY", "MAPQUEST_API_KEY", and "TICKETMASTER_API_KEY."
+The YELP_API_KEY should be put into `yelp.py` at the key variable (this has a TODO on it)
+
+Likewise, the MAPQUEST_API KEY should be put into `schedule.py`
 
 Finally, run the following commands:
 

@@ -33,17 +33,29 @@ You can receive an API Key for MapQuest and more information at https://develope
 
 You can receive an API Key for TicketMaster and more information at https://developer.ticketmaster.com/products-and-docs/apis/getting-started/
 
+Put all 3 API keys into a file named `.env` (note the dot in the file name) inside the root folder of the project, eventPlanner, in the exact format shown below:
+
+`YELP_API_KEY=your_yelp_api_key`
+
+`MAPQUEST_API_KEY=your_mapquest_api_key`
+
+`TICKETMASTER_API_KEY=your_ticketmaster_api_key`
+
+If for some reason the process outlined above does not work, insert the API keys into the following files as hard code.
+
 The YELP_API_KEY should be put into `yelp.py` at the key variable (this has a TODO on it)
 
-Likewise, the MAPQUEST_API KEY should be put into `schedule.py`
+The MAPQUEST_API_KEY should be put into `schedule.py` (this has a TODO on it)
 
-Finally, run the following commands:
+Use of the TICKETMASTER_API_KEY is not functional at this point so no action needs to be taken for this API key.
+
+Finally, run the following commands from the root directory, eventPlanner:
 
 `python manage.py makemigrations` (Commit the latest changes made to the databases)
 
 `python manage.py migrate` (Push the latest changes to the databases)
 
-`python manage.py runserver` (Start up the localhost server, Click the provided link.)
+`python manage.py runserver` (Start up the localhost server, click the provided link.)
 
 ## Roadmap
 * We have accomplished our goal of using the Yelp Api to find events for users based on their desired time frame and location

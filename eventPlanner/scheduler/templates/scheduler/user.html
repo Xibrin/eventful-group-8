@@ -8,22 +8,22 @@
 <form method="POST" action="{% url 'events' %}">
     {% csrf_token %}
     <label for="startTime">Enter a start Date and Time!:</label>
-    <input type="datetime-local" id="startTime">
+    <input type="datetime-local" name="startTime">
     <br>
     <br>
     <label for="endTime">Enter an end Date and Time!:</label>
-    <input type="datetime-local" id="endTime">
+    <input type="datetime-local" name="endTime">
     <br>
     <br>
     <label for="address">Enter an address!:</label>
-    <input type="text" id="address">
+    <input type="text" name="address">
     <br>
     <br>
     <label for="maxCommuteTimeHrs">Enter how long you want to travel for! Hours</label>
-    <input type="text" id="maxCommuteTimeHrs"><label for="maxCommuteTimeMins"> Minutes</label> <input type="text" id="maxCommuteTimeMins">
+    <input type="text" name="maxCommuteTimeHrs"><label for="maxCommuteTimeMins"> Minutes</label> <input type="text" name="maxCommuteTimeMins">
     <br>
     <br>
-    <input type="button" value="Find me Events!!">
+    <input type="submit" value="Find me Events!!">
 
 </form>
 

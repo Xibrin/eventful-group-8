@@ -1,7 +1,7 @@
 
 from datetime import datetime
 from . import schedule
-
+from dateutil import parser
 
 class User:
 
@@ -37,16 +37,20 @@ class User:
         print(possible_events)
         return possible_events
 
-    def find_events_naive(self, start_day, start_month, start_year, end_day, end_month, end_year, start_time, end_time, loc, days, hours, minutes):
+    def find_events_naive(self, start_time, end_time, loc, days, hours, minutes):
+        # start_day, start_month, start_year, end_day, end_month, end_year,
         # return list of events meeting criteria
         # d = datetime.utcnow()
         # current_time = calendar.timegm(d.utctimetuple())
-        start_time = int((datetime(start_year, start_month, start_day) - datetime(1970, 1, 1)).total_seconds())
-        end_time = int((datetime(end_year, end_month, end_day) - datetime(1970, 1, 1)).total_seconds())
+        # start_time = int((datetime(start_year, start_month, start_day) - datetime(1970, 1, 1)).total_seconds())
+        # end_time = int((datetime(end_year, end_month, end_day) - datetime(1970, 1, 1)).total_seconds())
+        start = parser.isoparse(start_time).timestamp()
+        print(start)
+        end = parser.isoparse(start_time).timestamp()
         max_travel_time = 86400 * days + hours * 3600 + 60
         # print("Current time: " + str(current_time))
         print("Start time: " + str(start_time))
         scheduling_alg = schedule.Schedule(0)
-        possible_events = scheduling_alg.find_events_generally(start_time, end_time, loc, max_travel_time)
+        possible_events = scheduling_alg.find_events_generally(start, end, loc, max_travel_time)
         print(possible_events)
         return possible_events

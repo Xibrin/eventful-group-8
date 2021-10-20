@@ -9,6 +9,7 @@ from datetime import datetime
 from ..support.event import eventStorage
 from ..support.location import Location
 from dateutil import parser
+from decouple import config
 
 
 class Yelp:
@@ -21,7 +22,7 @@ class Yelp:
     def parse_events(self, location, start_time):
         print("\nstarting YELP_API\n")
         # headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
-        key = ""  # TODO: INSERT YELP API KEY HERE
+        key = "LdrwKxiDhew1VU1Jt_rI4KXn_3vJGDRgJ9lUHJPFBX0fiWzLGcEJcLUi8iY8RM4XxDXng4eqnbkDweLihzU7iW8xTkXJmWqDb_vmfr1x6yiOturdqS1z8yTmYq9bYXYx" #config("YELP_API_KEY")  # TODO: INSERT YELP API KEY HERE
         headers = {'Authorization': 'Bearer %s' % key}
         limit = 50
         url = 'https://api.yelp.com/v3/events'
@@ -30,6 +31,7 @@ class Yelp:
             params = {'location': location, 'limit': limit, 'offset': i * 50, 'start_date': start_time}
             # Making a get request to the API
             req = requests.get(url, params=params, headers=headers)
+            print(req.url)
             # Split request by event (separated by curly braces)
             if req.status_code != 200:
                 print("STATUS CODE: " + str(req.status_code))

@@ -80,9 +80,14 @@ def events_view(request):
         start_time = request.POST["startTime"]
         end_time = request.POST["endTime"]
         address = request.POST["address"]
-        max_commute_time_hrs = request.POST["maxCommuteTimeHrs"]
-        max_commute_time_mins = request.POST["maxCommuteTimeMins"]
-        user_free = user.User(None, None)
-        print(len(user_free.find_events_naive(start_time,end_time,address,0, int(max_commute_time_hrs),int(max_commute_time_mins))))
+        max_commute_time_hrs = int(request.POST["maxCommuteTimeHrs"])
+        max_commute_time_mins = int(request.POST["maxCommuteTimeMins"])
+        user_free = user.User("hello", None)
+        events = user_free.find_events_naive(start_time,end_time,address,0, max_commute_time_hrs, max_commute_time_mins)
+        for event in events:
+            print(event is None)
+        return render(request, "scheduler/events.html", context={
+            "events": events
+        })
     return render(request, "scheduler/events.html")
 

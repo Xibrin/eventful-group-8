@@ -4,6 +4,11 @@
 {% block title %}EventFul{% endblock %}
 
 {% block body %}
-    <h2>Logged in as {{ user.first_name }}</h2>
-
+    <ul>
+    {% for event in events %}
+        <li>{{ event.name }}</li>
+    {% empty %}
+        <li>No events found</li>
+    {% endfor %}
+    </ul>
 {% endblock %}

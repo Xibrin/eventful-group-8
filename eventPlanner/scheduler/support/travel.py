@@ -23,7 +23,7 @@ class Travel:
     def get_map_response(self):
         base_url = "https://open.mapquestapi.com/directions/v2/route?key="
         locations = "&from=" + self.start_pos + "&to=" + self.end_pos
-        key = config("MAPQUEST_API_KEY")  # TODO: INSERT MAPQUEST API KEY HERE
+        key = ""  # TODO: INSERT MAPQUEST API KEY HERE       #config("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
         # print(response.json())
 
@@ -36,7 +36,7 @@ class Travel:
     def optimized_directions(self):
         base_url = "https://open.mapquestapi.com/directions/v2/optimizedroute?key="
         locations = "&json=" + self.location_list
-        key = os.getenv("MAPQUEST_API_KEY")
+        key = ""  # TODO: INSERT MAPQUEST API KEY HERE       #config("MAPQUEST_API_KEY")
         response = requests.get(base_url + key + locations)
         print(response.json())
 

@@ -22,7 +22,7 @@ class Yelp:
     def parse_events(self, location, start_time):
         print("\nstarting YELP_API\n")
         # headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
-        key = "LdrwKxiDhew1VU1Jt_rI4KXn_3vJGDRgJ9lUHJPFBX0fiWzLGcEJcLUi8iY8RM4XxDXng4eqnbkDweLihzU7iW8xTkXJmWqDb_vmfr1x6yiOturdqS1z8yTmYq9bYXYx" #config("YELP_API_KEY")  # TODO: INSERT YELP API KEY HERE
+        key = ""  # TODO: INSERT YELP API KEY HERE   # config("YELP_API_KEY")
         headers = {'Authorization': 'Bearer %s' % key}
         limit = 50
         url = 'https://api.yelp.com/v3/events'

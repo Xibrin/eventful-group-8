@@ -73,4 +73,4 @@ Finally, run the following commands from the root directory, eventPlanner:
 ## Acknowledgements
 * We would like to acknowledge the contributions of each of the team members in coming up with the design of the project and sharing their ideas on how to constantly improve the application.
 
-* We received assistance by watching publicly available videos of CS50 Introduction to Web Programming with Python and Javascript at Harvard University
+* We received assistance by watching publicly available videos of the course: CS50's Introduction to Web Programming with Python and Javascript offered by Harvard University

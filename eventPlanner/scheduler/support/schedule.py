@@ -3,7 +3,7 @@ import calendar
 from ..support.yelp import Yelp
 from ..support.travel import Travel
 import math
-# from eventPlanner.support.Yelp import parse_events
+
 
 class Schedule:
 

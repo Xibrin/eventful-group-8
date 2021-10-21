@@ -9,7 +9,6 @@ from datetime import datetime
 from ..support.event import eventStorage
 from ..support.location import Location
 from dateutil import parser
-from decouple import config
 
 
 class Yelp:
@@ -22,7 +21,7 @@ class Yelp:
     def parse_events(self, location, start_time):
         print("\nstarting YELP_API\n")
         # headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
-        key = ""  # TODO: INSERT YELP API KEY HERE   # config("YELP_API_KEY")
+        key = ""  # TODO: INSERT YELP API KEY HERE
         headers = {'Authorization': 'Bearer %s' % key}
         limit = 50
         url = 'https://api.yelp.com/v3/events'

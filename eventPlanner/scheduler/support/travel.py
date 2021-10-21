@@ -4,7 +4,7 @@ import os
 from . import route
 import json
 #from Project.route import Route
-from decouple import config
+
 
 class Travel:
     def __init__(self, start_pos=None, end_pos=None, location_list=None):
@@ -23,7 +23,7 @@ class Travel:
     def get_map_response(self):
         base_url = "https://open.mapquestapi.com/directions/v2/route?key="
         locations = "&from=" + self.start_pos + "&to=" + self.end_pos
-        key = ""  # TODO: INSERT MAPQUEST API KEY HERE       #config("MAPQUEST_API_KEY")
+        key = ""  # TODO: INSERT MAPQUEST API KEY HERE
         response = requests.get(base_url + key + locations)
         # print(response.json())
 
@@ -36,7 +36,7 @@ class Travel:
     def optimized_directions(self):
         base_url = "https://open.mapquestapi.com/directions/v2/optimizedroute?key="
         locations = "&json=" + self.location_list
-        key = ""  # TODO: INSERT MAPQUEST API KEY HERE       #config("MAPQUEST_API_KEY")
+        key = ""  # TODO: INSERT MAPQUEST API KEY HERE
         response = requests.get(base_url + key + locations)
         print(response.json())
 

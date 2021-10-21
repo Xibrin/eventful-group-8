@@ -4,11 +4,23 @@
 {% block title %}EventFul{% endblock %}
 
 {% block body %}
-    <ul>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for event in events %}
-        <li>{{ event.name }}</li>
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ event.picture }}" class="card-img-top" alt="No Image Available" height="200px">
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.name }}</h5>
+                    <p class="card-text">$ {{ event.price }}</p>
+                    <p>Starts: {{ event.start_time }}</p>
+                    <p>Ends: {{ event.end_time }}</p>
+                    <p class="card-text">{{ event.info }}</p>
+                </div>
+            </div>
+        </div>
     {% empty %}
-        <li>No events found</li>
+        <h3>No events found</h3>>
     {% endfor %}
-    </ul>
+    </div>
+    <h4><a href="{% url 'user' %}">Click here</a> to start a new search</h4>
 {% endblock %}

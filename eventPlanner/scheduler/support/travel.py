@@ -23,9 +23,9 @@ class Travel:
     def get_map_response(self):
         base_url = "https://open.mapquestapi.com/directions/v2/route?key="
         locations = "&from=" + self.start_pos + "&to=" + self.end_pos
-        key = ""  # TODO: INSERT MAPQUEST API KEY HERE
+        key = "JEq6beD60zZZFpjDPAGR9gnuO0k3B0IX"  # TODO: INSERT MAPQUEST API KEY HERE
         response = requests.get(base_url + key + locations)
-        # print(response.json())
+        print(response.json())
 
         #Return Route object
         return route.Route(json.loads(response.text))

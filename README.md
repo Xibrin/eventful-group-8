@@ -43,9 +43,9 @@ Put all 3 API keys into a file named `.env` (note the dot in the file name) insi
 
 If for some reason the process outlined above does not work, insert the API keys into the following files as hard code.
 
-The YELP_API_KEY should be put into `yelp.py` at the key variable (this has a TODO on it)
+The YELP_API_KEY should be put into `eventPlanner/scheduler/support/yelp.py` at the key variable (this has a TODO on it)
 
-The MAPQUEST_API_KEY should be put into `travel.py` (this has a TODO on it)
+The MAPQUEST_API_KEY should be put into `eventPLanner/scheduler/support/travel.py` (this has a TODO on it)
 
 Use of the TICKETMASTER_API_KEY is not functional at this point so no action needs to be taken for this API key.
 

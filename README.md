@@ -45,7 +45,7 @@ If for some reason the process outlined above does not work, insert the API keys
 
 The YELP_API_KEY should be put into `yelp.py` at the key variable (this has a TODO on it)
 
-The MAPQUEST_API_KEY should be put into `schedule.py` (this has a TODO on it)
+The MAPQUEST_API_KEY should be put into `travel.py` (this has a TODO on it)
 
 Use of the TICKETMASTER_API_KEY is not functional at this point so no action needs to be taken for this API key.
 

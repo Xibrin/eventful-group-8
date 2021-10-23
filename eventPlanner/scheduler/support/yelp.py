@@ -18,7 +18,7 @@ class Yelp:
         # self.start_time = start_time
         # self.location = location
 
-    def parse_events(self, location, start_time):
+    def parse_events(self, location, start_time, end_time):
         print("\nstarting YELP_API\n")
         # headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
         key = "ch0KHsoQZVMqSS13Q9Hsl5hsl2hAmy4WMoyeBjUVf_I4s4VJMXetUO7XnoBNj3K6d4jW0uD9DkqpkEk2lIlcpPVSqHoIw-G6dCVO6sfUNGi9zvkcQ9GpCTT6gY5cYXYx   "  # TODO: INSERT YELP API KEY HERE
@@ -27,7 +27,8 @@ class Yelp:
         url = 'https://api.yelp.com/v3/events'
         event_list = []
         for i in range(1):
-            params = {'location': location, 'limit': limit, 'offset': i * 50, 'start_date': start_time}
+            params = {'location': location, 'limit': limit, 'offset': i * 50, 'start_date': start_time,
+                      'end_date': end_time}
             # Making a get request to the API
             req = requests.get(url, params=params, headers=headers)
             print(req.url)

@@ -69,13 +69,13 @@ class Schedule:
 
         print(start_pos)
         print(event_start_time)
-        event_list = yao.parse_events(start_pos, event_start_time)
+        event_list = yao.parse_events(start_pos, event_start_time, end_time)
         if event_list is None:
             return "ERROR: no events found within timeframe"
         possible = []
         for event in event_list:
             if event:
-                print(event)
+                # print(event)
                 travel = Travel(start_pos, event.location.display)
                 travel_time = travel.get_travel_time()
                 print("Travel time: " + str(travel_time) + " from " + start_pos + " to" + event.location.display)

@@ -8,6 +8,7 @@ def real_day(time):
     return datetime.datetime(today.year, today.month, today.day).timestamp()
 
 
+
 class EventStorage:
 
     def __init__(self, name, start_time, end_time, location, category, info, price, outdoor, tickets, id, picture):

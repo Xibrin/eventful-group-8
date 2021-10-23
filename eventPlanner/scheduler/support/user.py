@@ -11,7 +11,9 @@ class User:
         # eventually set to median disposable income of area
         self.budget = 0
         self.preferred_transport = None
-        self.preferred_event_type = None
+        self.category_preference = {'music': 0, 'visual-arts': 0, 'performing-arts': 0, 'film': 0,
+                                    'lectures-books': 0, 'fashion': 0, 'food-and-drink': 0, 'festivals-fairs': 0,
+                                    'charities': 0, 'sports-active-life': 0, 'nightlife': 0, 'kids-family': 0, 'other': 0}
         self.schedule = None
 
     def set_transport(self, transport_type):
@@ -55,3 +57,9 @@ class User:
         possible_events = scheduling_alg.find_events_generally(start, end, loc, max_travel_time)
         print(possible_events)
         return possible_events
+
+    def setFavorites(self, category1, category2, category3):
+        self.category_preference[category1] = 3
+        self.category_preference[category2] = 2
+        self.category_preference[category3] = 1
+

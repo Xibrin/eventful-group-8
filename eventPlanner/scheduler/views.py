@@ -50,6 +50,7 @@ def register_view(request):
         email = request.POST["email"]
         password = request.POST["password"]
         confirm_password = request.POST["confirmPassword"]
+
         if password != confirm_password:
             return render(request, "scheduler/register.html", context={
                 "invalidMessage": "Passwords do not match"
@@ -62,6 +63,7 @@ def register_view(request):
                 email=email,
                 password=password
             )
+            # current_user.setFavorites()
             current_user.save()
         except IntegrityError:
             return render(request, "scheduler/register.html", context={

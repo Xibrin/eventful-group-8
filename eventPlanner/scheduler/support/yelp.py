@@ -6,7 +6,7 @@ import os
 import re
 from datetime import datetime
 
-from ..support.event import eventStorage
+from ..support.event import EventStorage
 from ..support.location import Location
 from dateutil import parser
 
@@ -82,6 +82,6 @@ class Yelp:
 
         if price is None:
             price = 0.0
-        to_add = eventStorage(name, uts_start, uts_end, loc, category, info, float(price), None, tickets, id, picture)
+        to_add = EventStorage(name, uts_start, uts_end, loc, category, info, float(price), None, tickets, id, picture)
         return to_add
 

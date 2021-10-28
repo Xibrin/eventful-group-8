@@ -3,7 +3,7 @@ import requests
 import os
 from . import route
 import json
-#from Project.route import Route
+# from Project.route import Route
 
 
 class Travel:
@@ -43,28 +43,7 @@ class Travel:
         #Return Route object
         return route.Route(json.loads(response.text))
 
-    #def create_route(self):
-    #    # use helper methods (or not depending on ease of implementation) to parse the directions into a route object
-    #    json_map = self.get_map_response()
-    #    route = Route(self.start_pos, self.end_pos, 0, 0, 0, 0)
-    #    route.end_pos = self.end_pos
-    #    route.start_pos = self.start_pos
-    #    route.distance = json_map.route.distance
-    #    route.cost = json_map.cost
-    #    route.time = json_map.time
-    #    route.means = json_map.means
-    #    return route
-
-    # Helper Methods
     #def get_fuel_cost(self):
     #    # parse Json to get fuel cost
     #    route = self.create_route()
     #    return route.cost
-
-    #def get_distance(self):
-    #    route = self.create_route()
-    #    return route.distance
-
-    #def get_time(self):
-    #    route = self.create_route()
-    #    return route.time

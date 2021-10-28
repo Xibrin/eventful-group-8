@@ -14,11 +14,11 @@ class EventStorage:
     def __init__(self, name, start_time, end_time, location, category, info, price, outdoor, tickets, id, picture):
         self.name = name
         self.start_date_time = start_time
-        self.start_time = start_time - self.Real_day(start_time)
+        self.start_time = start_time - real_day(start_time)
         self.start_time_display = datetime.datetime.fromtimestamp(self.start_date_time)
         self.end_date_time = end_time
         self.duration = self.set_duration()
-        self.end_time = end_time - self.Real_day(end_time)
+        self.end_time = end_time - real_day(end_time)
         self.end_time_display = datetime.datetime.fromtimestamp(self.end_date_time)
         self.location = location
         self.category = category

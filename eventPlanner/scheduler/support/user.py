@@ -1,7 +1,7 @@
-
 from datetime import datetime
-from . import schedule
 from dateutil import parser
+
+from ..support import schedule
 
 class User:
 
@@ -62,4 +62,5 @@ class User:
         self.category_preference[category1] = 3
         self.category_preference[category2] = 2
         self.category_preference[category3] = 1
+
 

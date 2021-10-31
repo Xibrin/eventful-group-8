@@ -6,7 +6,7 @@ class Route:
         self.directions = directions
         self.tolls = directions["route"]["hasTollRoad"]
         self.distance = directions["route"]["distance"]
-        self.time = directions["route"]["time"] #elapsed seconds
+        self.time = directions["route"]["time"]
         self.fuel_use = directions["route"]["fuelUsed"]
         # self.start_lng = directions["route"][]
 

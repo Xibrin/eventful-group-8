@@ -1,9 +1,5 @@
-import requests
-import os
-
 from ..support import yelp
-from ..support import ticketmaster
-from ..support import event
+#from ..support import ticketmaster
 
 
 def comparator():
@@ -19,14 +15,22 @@ def comparator():
 
 
 class EventFinder:
-    def __init__(self, location, start_time, end_time):
+    def __init__(self, location, start_time):
         self.location = location
         self.start_time = start_time
-        self.end_time = end_time
 
-    def find_all_events(self):
-        yao = yelp.Yelp()
-        event_list = yao.parse_events(self.location, self.start_time, self.end_time)
-        # append events from ticketmaster here
-        sorted_event_list = sorted(event_list, key=comparator())
-        return sorted_event_list
+    def get_yelp_events(self):
+        yelp_access_object = yelp.Yelp()
+        return yelp_access_object.parse_events(self.location, self.start_time)
+
+    def get_ticketmaster_events(self):
+        # TODO: Add ticketmaster implementation
+        return None
+
+    def save_all_events(self):
+        event_list = self.get_yelp_events()
+        # TODO: Append events from ticketmaster here
+        # TODO: Check to see if ticketmaster events already exist in event_list
+        for event in event_list:
+            event.save()
+

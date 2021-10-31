@@ -91,3 +91,4 @@ class Schedule:
     @staticmethod
     def commute_ratio(duration, growth_rate, max_ratio):
         return max_ratio / (1 + math.exp(-growth_rate(duration - 4)))
+

@@ -1,87 +1,60 @@
 import requests
-import json
-import requests
-import json
-import os
-import re
-from datetime import datetime
-
-from ..support.event import EventStorage
-from ..support.location import Location
 from dateutil import parser
 
+from ..models import Event
 
 class Yelp:
 
     def __init__(self):
-        pass
-        # self.start_time = start_time
-        # self.location = location
+        self.URL = 'https://api.yelp.com/v3/events'
+        self.KEY = "ch0KHsoQZVMqSS13Q9Hsl5hsl2hAmy4WMoyeBjUVf_I4s4VJMXetUO7XnoBNj3K6d4jW0uD9DkqpkEk2lIlcpPVSqHoIw-G6dCVO6sfUNGi9zvkcQ9GpCTT6gY5cYXYx"  # TODO: INSERT YELP API KEY HERE
+        self.HEADERS = {'Authorization': 'Bearer %s' % self.KEY}
+        self.LIMIT = 50
 
-    def parse_events(self, location, start_time, end_time):
-        print("\nstarting YELP_API\n")
-        # headers = {'Authorization': 'Bearer %s' % os.getenv("YELP_API_KEY")}
-        key = "ch0KHsoQZVMqSS13Q9Hsl5hsl2hAmy4WMoyeBjUVf_I4s4VJMXetUO7XnoBNj3K6d4jW0uD9DkqpkEk2lIlcpPVSqHoIw-G6dCVO6sfUNGi9zvkcQ9GpCTT6gY5cYXYx   "  # TODO: INSERT YELP API KEY HERE
-        headers = {'Authorization': 'Bearer %s' % key}
-        limit = 50
-        url = 'https://api.yelp.com/v3/events'
+    def parse_events(self, location, start_time):
         event_list = []
         for i in range(1):
-            params = {'location': location, 'limit': limit, 'offset': i * 50, 'start_date': start_time,
-                      'end_date': end_time}
+            params = {'location': location, 'limit': self.LIMIT, 'offset': i * self.LIMIT, 'start_date': start_time}
             # Making a get request to the API
-            req = requests.get(url, params=params, headers=headers)
-            print(req.url)
+            req = requests.get(self.URL, params=params, headers=self.HEADERS)
             # Split request by event (separated by curly braces)
+            print(req.url)
             if req.status_code != 200:
                 print("STATUS CODE: " + str(req.status_code))
-                return None
-            data = req.json()
-
-            # print(data['total'])
-            for val in data['events']:
-                # print(val)
-                event_list.append(Yelp.parse_one_event(val))
-
+                continue
+            response = req.json()
+            for event in response['events']:
+                e = Yelp.parse_one_event(event)
+                if e:
+                    event_list.append(e)
         return event_list
 
     @staticmethod
-    def parse_one_event(val):
-        name = val['name']
-        start_time = val['time_start']
-        end_time = val['time_end']
-        category = val['category']
-        info = val['description']
-        price = val['cost']
-        address1 = val['location']['address1']
-        city = val['location']['city']
-        zip_code = val['location']['zip_code']
-        country = val['location']['country']
-        state = val['location']['state']
-        display_address = val['location']['display_address']
-        disp = ""
-        for i in display_address:
-            disp += " " + i
-        loc = Location(address1, city, zip_code, state, country, disp)
-        tickets = val['tickets_url']
-        id = val['id']
-        picture = val['image_url']
-
-        # print("name:", name)
-        # print("starts:", start_time)
-        # print("ends:", end_time, "\n")
-        # Currently does not account for timezones --> issue to resolve eventually
-        dt_start = parser.parse(start_time)
-        uts_start = datetime.timestamp(dt_start)
-
-        if end_time is not None:
-            dt_end = parser.parse(end_time)
-            uts_end = datetime.timestamp(dt_end)
+    def parse_one_event(event):
+        new_event = Event()
+        new_event.name = event['name']
+        if event['time_start']:
+            print(event['time_start'])
+            new_event.start_time = parser.parse(event['time_start'])
         else:
-            uts_end = None
+            return None
+        if event["time_end"]:
+            new_event.end_time = parser.parse(event['time_end'])
+        else:
+            return None
+        new_event.category = event['category']
+        new_event.description = event['description']
+        new_event.cost = float(event['cost']) if event['cost'] else 0.0
 
-        if price is None:
-            price = 0.0
-        to_add = EventStorage(name, uts_start, uts_end, loc, category, info, float(price), None, tickets, id, picture)
-        return to_add
+        new_event.tickets = event['tickets_url']
+        new_event.picture = event['image_url']
+
+        new_event.address1 = event['location']['address1']
+        new_event.city = event['location']['city']
+        new_event.country = event['location']['country']
+        new_event.state = event['location']['state']
+        zip = event['location']['zip_code']
+        new_event.zip = int(zip) if zip and zip != '' else None
+
+        return new_event
 

@@ -4,9 +4,12 @@ from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User
 
-from .support import user
+import datetime
+from dateutil import parser
+
+from .models import User, Event
+from .support import event_finder
 
 
 def user_view(request):
@@ -28,6 +31,10 @@ def login_view(request):
         current_user = authenticate(request, username=email, password=password)
         if current_user:
             login(request, current_user)
+            Event.objects.all().delete()
+            new_event_finder = event_finder.EventFinder(location="MD", start_time=int(
+                parser.parse(datetime.datetime.now().isoformat()).timestamp()))
+            new_event_finder.save_all_events()
             return HttpResponseRedirect(reverse("user"))
         else:
             return render(request, "scheduler/login.html", context={
@@ -63,7 +70,7 @@ def register_view(request):
                 email=email,
                 password=password
             )
-            # current_user.setFavorites()
+            print(request.POST['row-1'])
             current_user.save()
         except IntegrityError:
             return render(request, "scheduler/register.html", context={
@@ -79,13 +86,20 @@ def register_view(request):
 @login_required
 def events_view(request):
     if request.method == "POST":
-        start_time = request.POST["startTime"]
-        end_time = request.POST["endTime"]
-        address = request.POST["address"]
+        start_time = parser.parse(request.POST["startTime"])
+        end_time = parser.parse(request.POST["endTime"])
+        city = request.POST["city"]
+        state = request.POST["state"]
         max_commute_time_hrs = int(request.POST["maxCommuteTimeHrs"])
         max_commute_time_mins = int(request.POST["maxCommuteTimeMins"])
-        user_free = user.User("hello", None)
-        events = user_free.find_events_naive(start_time,end_time,address,0, max_commute_time_hrs, max_commute_time_mins)
+
+        events = Event.objects.filter(
+            start_time__gte=start_time,
+            end_time__lte=end_time,
+            city=city,
+            state=state
+        )
+
         return render(request, "scheduler/events.html", context={
             "events": events
         })

@@ -1,6 +1,3 @@
-from ..support.event import EventStorage
-from ..support.event_finder import EventFinder
-
 
 def check_conflict_today(event1, event2):
     if event1.end_time < event2.start_time:

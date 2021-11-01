@@ -3,8 +3,23 @@ from django.db import models
 
 
 class User(AbstractUser):
-    pass
-
+    first_name = models.CharField(max_length=50, null=False, blank=False)
+    last_name = models.CharField(max_length=50, null=False, blank=False)
+    email = models.CharField(max_length=100, null=False, blank=False)
+    username = models.CharField(max_length=100, null=False, unique=True)
+    password = models.CharField(max_length=100, null=False, blank=False)
+    music = models.IntegerField(null=True)
+    visual = models.IntegerField(null=True)
+    performing = models.IntegerField(null=True)
+    film = models.IntegerField(null=True)
+    lectures = models.IntegerField(null=True)
+    fashion = models.IntegerField(null=True)
+    food = models.IntegerField(null=True)
+    festivals = models.IntegerField(null=True)
+    charity = models.IntegerField(null=True)
+    sports = models.IntegerField(null=True)
+    nightlife = models.IntegerField(null=True)
+    family = models.IntegerField(null=True)
 
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)

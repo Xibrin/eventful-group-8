@@ -12,7 +12,7 @@
 
     <form action = "{% url 'register' %}" method ="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_table }}
         <input type="submit">
     </form>
 

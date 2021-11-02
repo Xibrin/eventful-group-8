@@ -67,15 +67,16 @@ def compareCost(event1, max_cost):
 # distance[0][1] is origin to event 1
 # distance[1][0] is event 1 to origin
 def compareDist(origin, event_list):
+    q = len(event_list)
     w = len(event_list) + 1
     distance = [[0 for x in range(w)] for y in range(w)]
-    for i in range(w - 1):
+    for i in range(q):
         curr_travel_time = travel.get_travel_time(origin, event_list[i].address1)
         distance[0][i] = curr_travel_time
         distance[i][0] = curr_travel_time
 
-    for i in range(1, w):
-        for j in range(i + 1, w):
+    for i in range(1, q):
+        for j in range(i + 1, q):
             curr_travel_time = travel.get_travel_time(event_list[i].address1, event_list[j].address1)
             print("Event 1: " + str(event_list[i]) + " Event 2: " + str(event_list[j]))
             distance[i][j] = curr_travel_time

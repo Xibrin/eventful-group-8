@@ -5,7 +5,7 @@
 
 {% block body %}
     <h2>Logged in as {{ user.first_name }}</h2>
-    <form method="POST" action="{% url 'events' %}">
+    <form> <!--method="POST" action="{% url 'events' %}"-->
         {% csrf_token %}
         <label for="startTime">Enter a start Date and Time!:</label>
         <input type="datetime-local" name="startTime">
@@ -34,7 +34,10 @@
         <input type="float" name="cost">
         <br>
         <br>
-        <input type="submit" value="Find me Events!!">
+        <!--input type="submit" value="Find me Events!!">-->
+        <!--method="POST" action="{% url 'events' %}-->
+        <button type="submit" id='schedule' class="btn btn-success" formaction="{% url 'schedule' %}" formmethod="POST"> Submit to Schedule!</button>
+        <button type="submit" id='events' class="btn btn-success" formaction="{% url 'events' %}" formmethod="POST"> Submit to Events!</button>
     </form>
 
 {% endblock %}

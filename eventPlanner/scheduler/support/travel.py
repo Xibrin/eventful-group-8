@@ -35,7 +35,7 @@ def get_map_response(start_pos, end_pos):
         return dictionary["route"]["time"]
 
 def get_travel_time(start_pos, end_pos):
-    return get_map_response(start_pos, end_pos)
+    return get_map_response(start_pos, end_pos).time
 
 def optimized_directions(location_list):
     base_url = "https://open.mapquestapi.com/directions/v2/optimizedroute?key="

@@ -63,6 +63,8 @@ Finally, run the following commands from the root directory, eventPlanner:
 
 When searching for events, our current constraint is that you can only search for events in the state of Marlyand. This is because we have not yet found a robust way to store events that are outside of the state of Maryland.
 
+When searching, we have also implemented two options for users to get events. The schedule button allows for users to receive a scheudle of events, while the events button lists out general events the user can attend to. 
+
 
 ## Roadmap
 * We have accomplished our goal of redefining the login page to save user preferences, which allows us to extract information about the

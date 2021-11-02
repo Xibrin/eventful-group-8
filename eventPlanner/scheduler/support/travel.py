@@ -26,7 +26,13 @@ def get_map_response(start_pos, end_pos):
     # print(response.json())
 
     #Return Route object
-    return route.Route(json.loads(response.text))
+    #route.Route(json.loads(response.text))
+    dictionary = json.loads(response.text)
+
+    if dictionary["route"]:
+        return None
+    else:
+        return dictionary["route"]["time"]
 
 def get_travel_time(start_pos, end_pos):
     return get_map_response(start_pos, end_pos).time

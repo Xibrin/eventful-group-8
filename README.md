@@ -61,6 +61,9 @@ Finally, run the following commands from the root directory, eventPlanner:
 
 `python manage.py runserver` (Start up the localhost server, click the provided link.)
 
+When searching for events, our current constraint is that you can only search for events in the state of Marlyand. This is because we have not yet found a robust way to store events that are outside of the state of Maryland.
+
+
 ## Roadmap
 * We have accomplished our goal of redefining the login page to save user preferences, which allows us to extract information about the
 preferences of users for different "categories" of events

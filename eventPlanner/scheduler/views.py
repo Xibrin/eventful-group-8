@@ -38,7 +38,7 @@ def login_view(request):
             login(request, current_user)
             Event.objects.all().delete()
             #TODO: right now only MD is being input as the location
-            new_event_finder = event_finder.EventFinder(location="US", start_time=int(
+            new_event_finder = event_finder.EventFinder(location="MD", start_time=int(
                 parser.parse(datetime.datetime.now().isoformat()).timestamp()))
             new_event_finder.save_all_events()
             return HttpResponseRedirect(reverse("user"))

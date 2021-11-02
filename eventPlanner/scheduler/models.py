@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class User(AbstractUser):
@@ -8,18 +9,19 @@ class User(AbstractUser):
     email = models.CharField(max_length=100, null=False, blank=False)
     username = models.CharField(max_length=100, null=False, unique=True)
     password = models.CharField(max_length=100, null=False, blank=False)
-    music = models.IntegerField(null=True)
-    visual = models.IntegerField(null=True)
-    performing = models.IntegerField(null=True)
-    film = models.IntegerField(null=True)
-    lectures = models.IntegerField(null=True)
-    fashion = models.IntegerField(null=True)
-    food = models.IntegerField(null=True)
-    festivals = models.IntegerField(null=True)
-    charity = models.IntegerField(null=True)
-    sports = models.IntegerField(null=True)
-    nightlife = models.IntegerField(null=True)
-    family = models.IntegerField(null=True)
+    confirm_password = models.CharField(max_length=100, null=False, blank=False, default="0")
+    music = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    visual = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    performing = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    film = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    lectures = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    fashion = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    food = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    festivals = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    charity = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    sports = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    nightlife = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
+    family = models.PositiveIntegerField(default=1, validators = [MinValueValidator(1), MaxValueValidator(10)])
 
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)

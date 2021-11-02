@@ -25,6 +25,10 @@ To install the project dependencies, from the root directory, eventPlanner, run 
 
 git clone https://github.com/jhu-oose/2021-fall-group-group8.git and wait for authorization if not granted already
 
+First, you must navigate to settings.py and check for the TIME_ZONE parameter. In order to see the list of events with the proper time format,
+you must change the variable to reflect the timezone you are currently in. A list of acceptable variations can be found
+here: https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568
+
 You need api keys to access information used in our program and set these values as environmental variables
 
 You can receive an API Key for Yelp and more information at https://www.yelp.com/developers/documentation/v3/authentication
@@ -58,11 +62,18 @@ Finally, run the following commands from the root directory, eventPlanner:
 `python manage.py runserver` (Start up the localhost server, click the provided link.)
 
 ## Roadmap
-* We have accomplished our goal of using the Yelp Api to find events for users based on their desired time frame and location
+* We have accomplished our goal of redefining the login page to save user preferences, which allows us to extract information about the
+preferences of users for different "categories" of events
 
-* We still have to implement the use of the TicketMaster Api to find a greater range of events to offer to users 
+*We were able to refactor our code and eliminate redundant code and improve the overall organization of the project
 
-* We still need to develop a robust recommendation algorithm to offer a comprehensive schedule to users based on their preferences
+* We still have to implement the use of the TicketMaster Api to find a greater range of events to offer to users and 
+develop a migration function to combine events from both the Yelp Api and the TicketMaster Api
+
+* We need to improve our recommendation algorithm so that it has a more efficient running time and takes advantage of more user
+preferences. Our current algorithm does go above CRUD. 
+
+We still want to improve the user interface to make it more presentable and aesthetically appealing
 
 
 ## Contact

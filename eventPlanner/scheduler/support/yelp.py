@@ -42,6 +42,17 @@ class Yelp:
             new_event.end_time = parser.parse(event['time_end'])
         else:
             return None
+
+        try:
+            diff = new_event.start_time - new_event.end_time
+            new_event.duration = diff
+        except:
+            # print error in Hindi pong
+            print("Starting Hindi Pong in...")
+            print("3.. 2... 1...")
+            print("Initiated!")
+            return None
+
         new_event.category = event['category']
         new_event.description = event['description']
         new_event.cost = float(event['cost']) if event['cost'] else 0.0

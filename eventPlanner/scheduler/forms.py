@@ -7,7 +7,7 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
 
-        fields = ["first_name", "last_name", "email", "username", "password", "confirm_password",
+        fields = ["first_name", "last_name", "email", "username", "password", "confirm_password",  "city", "state",
                   "music", "visual", "performing", "film", "lectures", "fashion",
                   "food", "festivals", "charity", "sports", "nightlife", "family"]
         widgets = {
@@ -24,7 +24,6 @@ class UserForm(forms.ModelForm):
         if password != password_confirm:
             raise ValidationError("Passwords did not match")
 
-        #raise error for invalid input
         #get rid of submit button after user already there
         #how to retrieve user data
         return data

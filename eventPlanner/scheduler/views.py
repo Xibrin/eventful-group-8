@@ -15,6 +15,7 @@ from .support import event_finder
 from django import forms
 from .models import User
 from .forms import UserForm
+from .support import algorithm
 
 def user_view(request):
     if request.user.is_authenticated:
@@ -164,16 +165,21 @@ def register_view(request):
     #     })
     # return render(request, "scheduler/register.html")
 
+def schedule_view(request):
+    return render(request, "scheduler/schedule.html")
 
 @login_required
 def events_view(request):
     if request.method == "POST":
         start_time = parser.parse(request.POST["startTime"])
         end_time = parser.parse(request.POST["endTime"])
+        address = request.POST["address"]
         city = request.POST["city"]
         state = request.POST["state"]
         max_commute_time_hrs = int(request.POST["maxCommuteTimeHrs"])
         max_commute_time_mins = int(request.POST["maxCommuteTimeMins"])
+        cost = request.POST["cost"]
+
 
         events = Event.objects.filter(
             start_time__gte=start_time,
@@ -181,6 +187,9 @@ def events_view(request):
             city=city,
             state=state
         )
+
+        algorithm.compareDist(address, events)
+
 
         return render(request, "scheduler/events.html", context={
             "events": events

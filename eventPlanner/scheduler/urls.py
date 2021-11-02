@@ -12,4 +12,5 @@ urlpatterns = [
 
     # Events API URL
     path('events', views.events_view, name="events"),
+    path('schedule', views.schedule_view, name="schedule")
 ]

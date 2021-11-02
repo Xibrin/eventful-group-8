@@ -1,3 +1,4 @@
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -10,23 +11,27 @@ class User(AbstractUser):
     username = models.CharField(max_length=100, null=False, unique=True)
     password = models.CharField(max_length=100, null=False, blank=False)
     confirm_password = models.CharField(max_length=100, null=False, blank=True)
-    music = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    visual = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    performing = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    film = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    lectures = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    fashion = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    food = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    festivals = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    charity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    sports = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    nightlife = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
-    family = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    city = models.CharField(max_length=100, null=True, blank=False)
+    state = models.CharField(max_length=100, null=True, blank=False)
+    music = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    visual = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    performing = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    film = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    lectures = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    fashion = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    food = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    festivals = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    charity = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    sports = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    nightlife = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+    family = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(9)])
+
 
 class Event(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
     start_time = models.DateTimeField(null=False, blank=False)
     end_time = models.DateTimeField(null=True)
+    duration = models.DurationField(null=True)
     category = models.CharField(max_length=200, null=True)
     picture = models.URLField(max_length=300, null=False, default="")
     tickets = models.URLField(max_length=300, null=False, default="")

@@ -65,6 +65,7 @@ When searching for events, our current constraint is that you can only search fo
 
 When searching, we have also implemented two options for users to get events. The schedule button allows for users to receive a scheudle of events, while the events button lists out general events the user can attend to. 
 
+Sentence case for the City parameter means that the city needs to begin with a capitalized letter and the rest lowercase. For example, "Baltimore" is considered sentence case. 
 
 ## Roadmap
 * We have accomplished our goal of redefining the login page to save user preferences, which allows us to extract information about the

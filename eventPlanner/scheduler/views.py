@@ -166,6 +166,28 @@ def register_view(request):
     # return render(request, "scheduler/register.html")
 
 def schedule_view(request):
+    if request.method == "POST":
+        start_time = parser.parse(request.POST["startTime"])
+        end_time = parser.parse(request.POST["endTime"])
+        address = request.POST["address"]
+        city = request.POST["city"]
+        state = request.POST["state"]
+        max_commute_time_hrs = int(request.POST["maxCommuteTimeHrs"])
+        max_commute_time_mins = int(request.POST["maxCommuteTimeMins"])
+        cost = request.POST["cost"]
+
+        events = Event.objects.filter(
+            start_time__gte=start_time,
+            end_time__lte=end_time,
+            city=city,
+            state=state
+        )
+
+        algorithm.compareDist(address, events)
+
+        return render(request, "scheduler/schedule.html", context={
+            "events": events
+        })
     return render(request, "scheduler/schedule.html")
 
 @login_required

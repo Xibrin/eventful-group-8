@@ -70,13 +70,13 @@ def compareDist(origin, event_list):
     w = len(event_list) + 1
     distance = [[0 for x in range(w)] for y in range(w)]
     for i in range(w - 1):
-        curr_travel_time = travel.get_travel_time(origin, event_list[i])
+        curr_travel_time = travel.get_travel_time(origin, event_list[i].address1)
         distance[0][i] = curr_travel_time
         distance[i][0] = curr_travel_time
 
     for i in range(1, w):
         for j in range(i + 1, w):
-            curr_travel_time = travel.get_travel_time(event_list[i], event_list[j])
+            curr_travel_time = travel.get_travel_time(event_list[i].address1, event_list[j].address1)
             print("Event 1: " + str(event_list[i]) + " Event 2: " + str(event_list[j]))
             distance[i][j] = curr_travel_time
             distance[j][i] = curr_travel_time

@@ -4,11 +4,12 @@ class Route:
         self.start_pos = start_pos
         self.end_pos = end_pos
         self.directions = directions
-        self.tolls = directions["route"]["hasTollRoad"]
-        self.distance = directions["route"]["distance"]
-        self.time = directions["route"]["time"]
-        self.fuel_use = directions["route"]["fuelUsed"]
-        # self.start_lng = directions["route"][]
+        if directions["route"]:
+            # self.tolls = directions["route"]["hasTollRoad"]
+            self.distance = directions["route"]["distance"]
+            self.time = directions["route"]["time"]
+            self.fuel_use = directions["route"]["fuelUsed"]
+            # self.start_lng = directions["route"]["latLng"]["lng"]
 
     # Helper Methods
     def calculate_fuel_cost(self):

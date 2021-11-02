@@ -18,7 +18,7 @@ import json
 #         print("Both start_pos and location_lists are None")
 #         raise
 
-def get_map_response(self, start_pos, end_pos):
+def get_map_response(start_pos, end_pos):
     base_url = "https://open.mapquestapi.com/directions/v2/route?key="
     locations = "&from=" + start_pos + "&to=" + end_pos
     key = "JEq6beD60zZZFpjDPAGR9gnuO0k3B0IX"  # TODO: INSERT MAPQUEST API KEY HERE
@@ -28,12 +28,12 @@ def get_map_response(self, start_pos, end_pos):
     #Return Route object
     return route.Route(json.loads(response.text))
 
-def get_travel_time(self, start_pos, end_pos):
-    return get_map_response(start_pos,end_pos).time
+def get_travel_time(start_pos, end_pos):
+    return get_map_response(start_pos, end_pos).time
 
-def optimized_directions(self):
+def optimized_directions(location_list):
     base_url = "https://open.mapquestapi.com/directions/v2/optimizedroute?key="
-    locations = "&json=" + self.location_list
+    locations = "&json=" + location_list
     key = "JEq6beD60zZZFpjDPAGR9gnuO0k3B0IX"  # TODO: INSERT MAPQUEST API KEY HERE
     response = requests.get(base_url + key + locations)
     # print(response.json())

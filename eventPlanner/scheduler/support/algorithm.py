@@ -26,3 +26,7 @@ def closest_non_conflict(event_list, event_index):
             return curr_event
         curr_index -= 1
     return None
+
+def sort(event_list){
+
+}

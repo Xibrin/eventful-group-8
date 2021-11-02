@@ -78,8 +78,8 @@ def register_view(request):
             family = data.get("family")
             password = data.get("password")
             confirm_password = data.get("confirm_password")
-            print("Music: " + str(music))
-            print("REACHED POST")
+            #print("Music: " + str(music))
+            #print("REACHED POST")
             try:
                 current_user = User.objects.create_user(
                     first_name=first_name,
@@ -101,14 +101,15 @@ def register_view(request):
                     nightlife = nightlife,
                     family = family
                 )
-                #print(request.POST['row-1'])
                 current_user.save()
             except IntegrityError:
                 return render(request, "scheduler/register.html", context={
                     "invalidMessage": "Email address already in use"
                 })
             login(request, current_user)
-        return render(request, "scheduler/login.html")
+        return render(request, "scheduler/login.html", context={
+             "successMessage": "Successfully created new user"
+         })
     else:
         return render(request, "scheduler/register.html", {
             "form": UserForm()

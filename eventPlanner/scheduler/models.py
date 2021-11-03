@@ -44,7 +44,7 @@ class Event(models.Model):
     zip = models.IntegerField(null=True)
 
     def __str__(self):
-        return f"{self.name} starting at {self.start_time} costing {self.cost}"
+        return f"{self.name} starting at {self.start_time} costing {self.cost}, ending at {self.end_time}"
 
     def __eq__(self, other):
         return self.name == other.name

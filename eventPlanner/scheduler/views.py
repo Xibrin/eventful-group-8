@@ -183,10 +183,12 @@ def schedule_view(request):
             state=state
         )
 
-        algorithm.compareDist(address, events)
+        scheduled = algorithm.get_schedule(address, events, request.user)
+
+        # algorithm.compareDist(address, events)
 
         return render(request, "scheduler/schedule.html", context={
-            "events": events
+            "events": scheduled
         })
     return render(request, "scheduler/schedule.html")
 

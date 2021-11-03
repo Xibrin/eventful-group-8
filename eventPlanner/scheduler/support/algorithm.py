@@ -155,12 +155,15 @@ def get_schedule(origin, event_list, user):
 
         exclude_curr = optimal[i-1] #value of excluding curr
         if include_curr > exclude_curr:
-            opt_list[i].extend(opt_list[i])
+            if prev_no_conflict >= 0:
+                opt_list[i].extend(opt_list[prev_no_conflict])
             opt_list[i].append(events[i-1])
             optimal[i] = include_curr
+            print("INCLUDED")
         else:
             opt_list[i].extend(opt_list[i-1])
             optimal[i] = exclude_curr
+            print("EXCLUDED")
         print("Current optimal: ")
         print(opt_list[i])
 

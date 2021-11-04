@@ -34,7 +34,7 @@ class Event(models.Model):
     duration = models.DurationField(null=True)
     category = models.CharField(max_length=200, null=True)
     picture = models.URLField(max_length=300, null=False, default="")
-    tickets = models.URLField(max_length=300, null=False, default="")
+    tickets = models.URLField(max_length=300, null=True, default="")
     cost = models.DecimalField(default=0.0, max_digits=7, decimal_places=2, null=False)
     description = models.CharField(max_length=500, null=True)
     address1 = models.CharField(max_length=200, null=True)

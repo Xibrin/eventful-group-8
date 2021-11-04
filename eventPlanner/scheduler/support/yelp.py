@@ -58,8 +58,9 @@ class Yelp:
         new_event.cost = float(event['cost']) if event['cost'] else 0.0
 
         new_event.tickets = event['tickets_url']
+        if new_event.tickets is None:
+            new_event.tickets = ""
         new_event.picture = event['image_url']
-
         new_event.address1 = event['location']['address1']
         new_event.city = event['location']['city']
         new_event.country = event['location']['country']

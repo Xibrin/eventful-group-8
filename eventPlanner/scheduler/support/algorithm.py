@@ -36,6 +36,7 @@ def check_conflict(event1, event2):
         return True
         # check_conflict_today(event1, event2)
 
+
 # event list is a list of events sorted by end time, event index is the index of the current event in the list
 def closest_non_conflict(event_list, event_index):
     curr_index = event_index - 1
@@ -46,6 +47,7 @@ def closest_non_conflict(event_list, event_index):
             return curr_event
         curr_index -= 1
     return None
+
 
 def closest_non_conflict_index(event_list, event_index):
     curr_index = event_index - 1
@@ -60,6 +62,7 @@ def closest_non_conflict_index(event_list, event_index):
             return curr_index
         curr_index -= 1
     return -1
+
 
 def sort(event_list):
     weight = 0
@@ -124,6 +127,7 @@ def compareDist(origin, event_list):
 
     return distance
 
+
 def less_than(event1, event2):
     if event1.end_time < event2.end_time:
         return -1
@@ -132,36 +136,38 @@ def less_than(event1, event2):
     else:
         return 0
 
+
 def sortEventsByTime(event_list):
     return sorted(event_list, key=cmp_to_key(less_than))
 
+
 def get_schedule(origin, event_list, user):
-    events =sortEventsByTime(event_list)
+    events = sortEventsByTime(event_list)
     n = len(events)
-    optimal = [0] * (n+1)
+    optimal = [0] * (n + 1)
     opt_list = []
-    for i in range(n+1):
+    for i in range(n + 1):
         opt_list.append([])
 
-    for i in range(1,n+1):
-        prev_no_conflict = closest_non_conflict_index(events,i-1) # last index where event does not conflict
-        prev_no_conflict_event = closest_non_conflict(events,i-1)
+    for i in range(1, n + 1):
+        prev_no_conflict = closest_non_conflict_index(events, i - 1)  # last index where event does not conflict
+        prev_no_conflict_event = closest_non_conflict(events, i - 1)
         print("Current index: " + str(i))
-        print("Current event: " + str(events[i-1]))
+        print("Current event: " + str(events[i - 1]))
         print("Prev no conflict event: " + str(prev_no_conflict_event))
-        include_curr = compCategory(events[i-1],user)
+        include_curr = compCategory(events[i - 1], user)
         if prev_no_conflict >= 0:
-            include_curr += optimal[prev_no_conflict] #value of including curr
+            include_curr += optimal[prev_no_conflict]  # value of including curr
 
-        exclude_curr = optimal[i-1] #value of excluding curr
+        exclude_curr = optimal[i - 1]  # value of excluding curr
         if include_curr > exclude_curr:
             if prev_no_conflict >= 0:
                 opt_list[i].extend(opt_list[prev_no_conflict])
-            opt_list[i].append(events[i-1])
+            opt_list[i].append(events[i - 1])
             optimal[i] = include_curr
             print("INCLUDED")
         else:
-            opt_list[i].extend(opt_list[i-1])
+            opt_list[i].extend(opt_list[i - 1])
             optimal[i] = exclude_curr
             print("EXCLUDED")
         print("Current optimal: ")
@@ -173,7 +179,3 @@ def get_schedule(origin, event_list, user):
     # print(optimal[n])
     # print(opt_list[n])
     return opt_list[n]
-
-
-
-

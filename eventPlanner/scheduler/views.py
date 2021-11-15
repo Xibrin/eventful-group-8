@@ -32,6 +32,7 @@ def user_view(request):
 def login_view(request):
     if request.method == "POST":
         email = request.POST["email"]
+        username = request.POST["username"]
         password = request.POST["password"]
         current_user = authenticate(request, username=email, password=password)
         if current_user:
@@ -79,6 +80,7 @@ def register_view(request):
             family = data.get("family")
             password = data.get("password")
             confirm_password = data.get("confirm_password")
+            state = data.get("state")
             #print("Music: " + str(music))
             #print("REACHED POST")
             try:
@@ -100,70 +102,38 @@ def register_view(request):
                     charity = charity,
                     sports = sports,
                     nightlife = nightlife,
-                    family = family
+                    family = family,
+                    state = area
                 )
+
+                if not Event.objects.filter(state).exists():
+                    curr_state = State()
+                    curr_state.state = state
+                    curr_state.save()
+
                 current_user.save()
             except IntegrityError:
                 return render(request, "scheduler/register.html", context={
                     "invalidMessage": "Email address already in use"
                 })
             login(request, current_user)
+        else:
+            return render(request, "scheduler/register.html", context={
+                "invalidMessage": "Issue with registration"
+            })
+        login(request, current_user)
+
         return render(request, "scheduler/login.html", context={
              "successMessage": "Successfully created new user"
          })
+
+
     else:
+        print("Is this working")
         return render(request, "scheduler/register.html", {
             "form": UserForm()
         })
-    # if request.method == "POST":
-    #     first_name = request.POST["firstName"]
-    #     last_name = request.POST["lastName"]
-    #     email = request.POST["email"]
-    #     username = request.POST["email"]
-    #     password = request.POST["password"]
-    #     confirm_password = request.POST["confirmPassword"]
-    #     music = request.POST["row-1"]
-    #     visual  = request.POST["row-2"]
-    #     performing =  request.POST["row-3"]
-    #     film =  request.POST["row-4"]
-    #     lectures  = request.POST["row-5"]
-    #     fashion  = request.POST["row-6"]
-    #     food =  request.POST["row-7"]
-    #     festivals =  request.POST["row-8"]
-    #     charity  = request.POST["row-9"]
-    #     sports  = request.POST["row-10"]
-    #     nightlife  = request.POST["row-11"]
-    #     family  = request.POST["row-12"]
-    #
-    #
-    #     if password != confirm_password:
-    #         return render(request, "scheduler/register.html", context={
-    #             "invalidMessage": "Passwords do not match"
-    #         })
-    #
-    #     try:
-    #         current_user = User.objects.create_user(
-    #             first_name=first_name,
-    #             last_name=last_name,
-    #             username=email,
-    #             email=email,
-    #             password=password
-    #         )
-    #         print(request.POST['row-1'])
-    #         current_user.save()
-    #     except IntegrityError:
-    #         return render(request, "scheduler/register.html", context={
-    #             "invalidMessage": "Email address already in use"
-    #         })
-    #     login(request, current_user)
-    #     form = UserForm(request.POST or None)
-    #     if form.is_valid():
-    #         form.save()
-    #
-    #     return render(request, "scheduler/login.html", context={
-    #         "successMessage": "Successfully created new user"
-    #     })
-    # return render(request, "scheduler/register.html")
+
 
 def schedule_view(request):
     if request.method == "POST":
@@ -179,7 +149,7 @@ def schedule_view(request):
         events = Event.objects.filter(
             start_time__gte=start_time,
             end_time__lte=end_time,
-            city=city,
+            # city=city,
             state=state
         )
 

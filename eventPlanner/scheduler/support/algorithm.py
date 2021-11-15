@@ -11,6 +11,40 @@ from functools import cmp_to_key
 #     else:
 #         return True
 
+class travelTimeMatrix:
+    # events are pre-sorted since this is being called in ALGO
+    def __init__(self, origin, events):
+        self.num_map = {}
+        for i, val in enumerate(events):
+            num_map[val] = i
+
+        self.time_array = compare_dist(origin, events)
+        self.origin = origin
+        self.events = events
+
+    def compare_dist(self):
+        event_list = self.events
+        q = len(event_list)
+        w = len(event_list) + 1
+        distance = [[0 for x in range(w)] for y in range(w)]
+        for i in range(q):
+            curr_travel_time = travel.get_travel_time(self.origin, event_list[i].address1)
+            distance[0][i] = curr_travel_time
+            distance[i][0] = curr_travel_time
+        for i in range(1, q):
+            for j in range(i + 1, q):
+                curr_travel_time = travel.get_travel_time(event_list[i].address1, event_list[j].address1)
+                print("Event 1: " + str(event_list[i]) + " Event 2: " + str(event_list[j]))
+                distance[i][j] = curr_travel_time
+                distance[j][i] = curr_travel_time
+
+        return distance
+
+    def get_time(self, event1, event2):
+        index1 = self.num_map[event1]
+        index2 = self.num_map[event2]
+        return self.time_array[index1][index2]
+
 categoryDict = {
     "music": "music",
     "visual-arts": "visual",
@@ -27,10 +61,10 @@ categoryDict = {
 }
 
 
-def check_conflict(event1, event2):
-    if event1.end_time < event2.start_time:
+def check_conflict(event1, event2, time_matrix):
+    if event1.end_time + time_matrix.get_time(event1,event2) < event2.start_time:
         return False
-    elif event2.end_time < event1.start_time:
+    elif event2.end_time + time_matrix.get_time(event1,event2) < event1.start_time:
         return False
     else:
         return True
@@ -38,7 +72,7 @@ def check_conflict(event1, event2):
 
 
 # event list is a list of events sorted by end time, event index is the index of the current event in the list
-def closest_non_conflict(event_list, event_index):
+def closest_non_conflict(time_matrix, event_index):
     curr_index = event_index - 1
     e = event_list[event_index]
     while curr_index >= 0:
@@ -49,16 +83,18 @@ def closest_non_conflict(event_list, event_index):
     return None
 
 
-def closest_non_conflict_index(event_list, event_index):
+def closest_non_conflict_index(time_matrix, event_list, event_index):
     curr_index = event_index - 1
     print("EVENT INDEX: " + str(event_index))
     print(len(event_list))
-    if event_index >= len(event_list):
+    if event_index >= len(time_matrix.events):
         return -1
-    e = event_list[event_index]
+    # e = event_list[event_index]
+    e = time_matrix.events[event_index]
     while curr_index >= 0:
-        curr_event = event_list[curr_index]
-        if not check_conflict(curr_event, e):
+        # curr_event = event_list[curr_index]
+        curr_event = time_matrix.events[curr_index]
+        if not check_conflict(curr_event, e, time_matrix):
             return curr_index
         curr_index -= 1
     return -1
@@ -107,25 +143,10 @@ def compareCost(event1, max_cost):
         return 1
 
 
-# distance[0][1] is origin to event 1
-# distance[1][0] is event 1 to origin
-def compareDist(origin, event_list):
-    q = len(event_list)
-    w = len(event_list) + 1
-    distance = [[0 for x in range(w)] for y in range(w)]
-    for i in range(q):
-        curr_travel_time = travel.get_travel_time(origin, event_list[i].address1)
-        distance[0][i] = curr_travel_time
-        distance[i][0] = curr_travel_time
+# distance[0][1] is travel time between origin to event 1
+# distance[1][0] is travel time between event 1 to origin
+# event_list is all valid events (start, end, state)
 
-    for i in range(1, q):
-        for j in range(i + 1, q):
-            curr_travel_time = travel.get_travel_time(event_list[i].address1, event_list[j].address1)
-            print("Event 1: " + str(event_list[i]) + " Event 2: " + str(event_list[j]))
-            distance[i][j] = curr_travel_time
-            distance[j][i] = curr_travel_time
-
-    return distance
 
 
 def less_than(event1, event2):
@@ -143,6 +164,7 @@ def sortEventsByTime(event_list):
 
 def get_schedule(origin, event_list, user):
     events = sortEventsByTime(event_list)
+    t = travelTimeMatrix(origin, events)
     n = len(events)
     optimal = [0] * (n + 1)
     opt_list = []
@@ -150,11 +172,12 @@ def get_schedule(origin, event_list, user):
         opt_list.append([])
 
     for i in range(1, n + 1):
-        prev_no_conflict = closest_non_conflict_index(events, i - 1)  # last index where event does not conflict
-        prev_no_conflict_event = closest_non_conflict(events, i - 1)
+        prev_no_conflict = closest_non_conflict_index(t, i - 1)  # last index where event does not conflict
+        # prev_no_conflict_event = closest_non_conflict(t, i - 1) # last event with no conflict
+
         print("Current index: " + str(i))
         print("Current event: " + str(events[i - 1]))
-        print("Prev no conflict event: " + str(prev_no_conflict_event))
+        # print("Prev no conflict event: " + str(prev_no_conflict_event))
         include_curr = compCategory(events[i - 1], user)
         if prev_no_conflict >= 0:
             include_curr += optimal[prev_no_conflict]  # value of including curr

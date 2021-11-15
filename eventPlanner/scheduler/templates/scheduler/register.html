@@ -12,6 +12,7 @@
 
     <form action = "{% url 'register' %}" method ="post">
         {% csrf_token %}
+        <h3>Please rate your preferences for the categories listed below from 1 to 10, with 1 being the least preferred and 10 being the most preferred</h3>
         {{form.as_ul}}
         <input type="submit">
     </form>

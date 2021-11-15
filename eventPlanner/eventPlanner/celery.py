@@ -1,6 +1,12 @@
 import os
-
 from celery import Celery
+from celery.schedules import crontab
+# from ..scheduler.models import State
+from .eventPlanner.eventPlanner.scheduler.models import State
+# from eventPlanner.scheduler.models import State
+
+# from ..scheduler.models import State
+# from .scheduler.models import State
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eventPlanner.settings')
 
@@ -12,6 +18,15 @@ app = Celery('eventPlanner')
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+
+app.conf.beat_schedule = {
+    'refresh-events-twice-a-day': {
+        'task': 'scheduler.tasks.refresh',
+        # 'schedule': crontab(minute=0, hours='4,14'),
+        'schedule': crontab(minute=1),
+        'args': State.objects
+    },
+}
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 

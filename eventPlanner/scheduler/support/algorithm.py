@@ -19,9 +19,9 @@ class travelTimeMatrix:
         for i, val in enumerate(events):
             self.num_map[val] = i
 
-        self.time_array = self.compare_dist(origin, events)
         self.origin = origin
         self.events = events
+        self.time_array = self.compare_dist()
 
     def compare_dist(self):
         event_list = self.events
@@ -30,15 +30,19 @@ class travelTimeMatrix:
         distance = [[0 for x in range(w)] for y in range(w)]
         for i in range(q):
             curr_travel_time = travel.get_travel_time(self.origin, event_list[i].address1)
+            print("THIS IS CURR TRAVEL TIME:")
+            print(curr_travel_time, "\n")
             distance[0][i] = curr_travel_time
             distance[i][0] = curr_travel_time
         for i in range(1, q):
             for j in range(i + 1, q):
                 curr_travel_time = travel.get_travel_time(event_list[i].address1, event_list[j].address1)
-                print("Event 1: " + str(event_list[i]) + " Event 2: " + str(event_list[j]))
+                print("Event 1: ", str(event_list[i]), " Event 2: ", str(event_list[j]), " Travel time between: ", str(curr_travel_time))
                 distance[i][j] = curr_travel_time
                 distance[j][i] = curr_travel_time
 
+        print("TIME ARRAY:")
+        print(distance)
         return distance
 
     def get_time(self, event1, event2):
@@ -74,21 +78,23 @@ def check_conflict(event1, event2, time_matrix):
 
 
 # event list is a list of events sorted by end time, event index is the index of the current event in the list
-def closest_non_conflict(time_matrix, event_index):
-    curr_index = event_index - 1
-    e = event_list[event_index]
-    while curr_index >= 0:
-        curr_event = event_list[curr_index]
-        if not check_conflict(curr_event, e):
-            return curr_event
-        curr_index -= 1
-    return None
+# def closest_non_conflict(time_matrix, event_index):
+#     curr_index = event_index - 1
+#     event_list = time_matrix.events
+#     e = event_list[event_index]
+#     while curr_index >= 0:
+#         curr_event = event_list[curr_index]
+#         if not check_conflict(curr_event, e, time_matrix):
+#             return curr_event
+#         curr_index -= 1
+#     return None
 
 
-def closest_non_conflict_index(time_matrix, event_list, event_index):
+def closest_non_conflict_index(time_matrix, event_index):
     curr_index = event_index - 1
-    print("EVENT INDEX: " + str(event_index))
-    print(len(event_list))
+    # event_list = time_matrix.events
+    # print("EVENT INDEX: " + str(event_index))
+    # print(len(event_list))
     if event_index >= len(time_matrix.events):
         return -1
     # e = event_list[event_index]

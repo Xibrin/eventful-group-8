@@ -20,6 +20,11 @@ To install the project dependencies, from the root directory, eventPlanner, run 
 
 `pip install -r requirements.txt`
 
+You must install celery to be able to use this feature of refreshing the database every 12 hours with new events. You can run the following command:
+
+pip3 install celery'
+
+
 
 ## Running the Program
 
@@ -68,19 +73,13 @@ When searching, we have also implemented two options for users to get events. Th
 Sentence case for the City parameter means that the city needs to begin with a capitalized letter and the rest lowercase. For example, "Baltimore" is considered sentence case. 
 
 ## Roadmap
-* We have accomplished our goal of redefining the login page to save user preferences, which allows us to extract information about the
-preferences of users for different "categories" of events
+*We have accomplished our goal of finishing the implementation of the TicketMaster API to find a greater variety of events for users
 
-*We were able to refactor our code and eliminate redundant code and improve the overall organization of the project
+*We have also improved our algorithm to get a better schedule for users that can be optimized by distances between next events
 
-* We still have to implement the use of the TicketMaster Api to find a greater range of events to offer to users and 
-develop a migration function to combine events from both the Yelp Api and the TicketMaster Api
+*We still want to polish our login features by using Google authorization and/or letting users login with either a username or email
 
-* We need to improve our recommendation algorithm so that it has a more efficient running time and takes advantage of more user
-preferences. Our current algorithm does go above CRUD. 
-
-We still want to improve the user interface to make it more presentable and aesthetically appealing
-
+*We still want to update the aesthetic of the front-end components of our application
 
 ## Contact
 * If you have any questions or concerns, you can reach the project link at https://github.com/jhu-oose/2021-fall-group-group8.git.

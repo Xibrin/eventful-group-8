@@ -29,9 +29,11 @@ def get_map_response(start_pos, end_pos):
 
     # Return Route object
     # route.Route(json.loads(response.text))
+    print("Start: " + start_pos + " End: " + end_pos)
     dictionary = json.loads(response.text)
 
     if dictionary["route"]:
+        print("ROUTE ISSUE")
         return None
     else:
         return dictionary["route"]["time"]

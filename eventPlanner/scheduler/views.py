@@ -179,7 +179,7 @@ def events_view(request):
             state=state
         )
 
-        algorithm.compareDist(address, events)
+        # algorithm.compareDist(address, events)
 
         return render(request, "scheduler/events.html", context={
             "events": events

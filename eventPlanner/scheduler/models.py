@@ -3,6 +3,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+class BaseModel(models.Model):
+    objects = models.Manager()
+    class Meta:
+        abstract = True
 
 class User(AbstractUser):
     first_name = models.CharField(max_length=50, null=False, blank=False)
@@ -25,13 +29,14 @@ class User(AbstractUser):
     sports = models.IntegerField(choices=zip(range(1, 10), range(1, 10)), blank=False)
     nightlife = models.IntegerField(choices=zip(range(1, 10), range(1, 10)), blank=False)
     family = models.IntegerField(choices=zip(range(1, 10), range(1, 10)), blank=False)
+    # objects = models.Manager()
 
 
-class State(models.Model):
+class State(BaseModel):
     state = models.CharField(max_length=100, null=True, blank=False)
+    # objects = models.Manager()
 
-
-class Event(models.Model):
+class Event(BaseModel):
     name = models.CharField(max_length=200, null=False, blank=False)
     start_time = models.DateTimeField(null=False, blank=False)
     end_time = models.DateTimeField(null=True)
@@ -46,9 +51,13 @@ class Event(models.Model):
     state = models.CharField(max_length=100, null=False, blank=False, default="")
     country = models.CharField(max_length=100, null=False, blank=False, default="")
     zip = models.IntegerField(null=True)
+    # objects = models.Manager()
 
     def __str__(self):
         return f"{self.name} starting at {self.start_time} costing {self.cost}, ending at {self.end_time}"
 
     def __eq__(self, other):
         return self.name == other.name
+
+    def __hash__(self):
+        return hash(self.name)

@@ -53,7 +53,7 @@ The MAPQUEST_API_KEY should be put into `eventPLanner/scheduler/support/travel.p
 
 Use of the TICKETMASTER_API_KEY is not functional at this point so no action needs to be taken for this API key.
 
-Finally, run the following commands from the root directory, eventPlanner:
+Finally, run the following commands from the eventPlanner directory:
 
 `python manage.py makemigrations` (Commit the latest changes made to the databases)
 

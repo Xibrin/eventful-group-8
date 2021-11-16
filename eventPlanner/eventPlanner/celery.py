@@ -26,11 +26,12 @@ app.conf.beat_schedule = {
     'refresh-events-twice-a-day': {
        'task': 'scheduler.tasks.refresh',
         'schedule': crontab(minute=0, hours='4,14'),
-        'schedule': crontab(minute=1),
+        # 'schedule': crontab(minute=1),
         'args': State.objects
    },
 }
-Load task modules from all registered Django apps.
+# Load task modules from all registered Django apps.
+
 app.autodiscover_tasks()
 
 

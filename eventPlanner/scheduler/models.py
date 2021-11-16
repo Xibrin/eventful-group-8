@@ -12,7 +12,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=100, null=False, blank=False)
     confirm_password = models.CharField(max_length=100, null=False, blank=True)
     city = models.CharField(max_length=100, null=True, blank=False)
-    state = models.CharField(max_length=100, null=False, blank=False)
+    state = models.CharField(max_length=100, null=True, blank=False)
     music = models.IntegerField(choices=zip(range(1, 10), range(1, 10)), blank=False)
     visual = models.IntegerField(choices=zip(range(1, 10), range(1, 10)), blank=False)
     performing = models.IntegerField(choices=zip(range(1, 10), range(1, 10)), blank=False)

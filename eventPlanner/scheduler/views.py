@@ -10,10 +10,8 @@ from django import forms
 import datetime
 from dateutil import parser
 
-from .models import User, Event
+from .models import User, Event, State
 from .support import event_finder
-from django import forms
-from .models import User
 from .forms import UserForm
 from .support import algorithm
 
@@ -32,7 +30,7 @@ def user_view(request):
 def login_view(request):
     if request.method == "POST":
         email = request.POST["email"]
-        username = request.POST["username"]
+        #username = request.POST["username"]
         password = request.POST["password"]
         current_user = authenticate(request, username=email, password=password)
         if current_user:
@@ -82,7 +80,7 @@ def register_view(request):
             confirm_password = data.get("confirm_password")
             state = data.get("state")
             #print("Music: " + str(music))
-            #print("REACHED POST")
+            print("REACHED POST")
             try:
                 current_user = User.objects.create_user(
                     first_name=first_name,
@@ -103,15 +101,14 @@ def register_view(request):
                     sports = sports,
                     nightlife = nightlife,
                     family = family,
-                    state = area
+                    state = state
                 )
 
                 if not Event.objects.filter(state).exists():
                     curr_state = State()
                     curr_state.state = state
                     curr_state.save()
-
-                current_user.save()
+                    current_user.save()
             except IntegrityError:
                 return render(request, "scheduler/register.html", context={
                     "invalidMessage": "Email address already in use"

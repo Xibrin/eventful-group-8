@@ -134,5 +134,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery Configuration Options
-CELERY_TIMEZONE = "America/Baltimore"
-CELERY_TASK_TRACK_STARTED = True
+#CELERY_TIMEZONE = "America/Baltimore"
+#CELERY_TASK_TRACK_STARTED = True

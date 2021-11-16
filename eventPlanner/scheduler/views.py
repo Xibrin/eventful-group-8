@@ -15,6 +15,7 @@ from .support import event_finder
 from .forms import UserForm
 from .support import algorithm
 
+# Attempt to fix
 
 def user_view(request):
     if request.user.is_authenticated:

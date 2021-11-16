@@ -70,33 +70,32 @@ categoryDict = {
 
 
 def check_conflict(event1, event2, time_matrix):
-    # travel_time = time_matrix.get_time(event1,event2)
+    travel_time = time_matrix.get_time(event1,event2)
 
-    if event1.end_time < event2.start_time:
-        print("Event 1 : ", event1, " ", event1.end_time," Event 2: ", event2, " ", event2.start_time)
-        print("False")
-        return False
-    elif event2.end_time < event1.start_time:
-        print("Event 1 : ", event1.end_time, " Event 2: ", event2.start_time)
-        print("False")
-        return False
+    if travel_time == 0:
+        if event1.end_time < event2.start_time:
+            # print("Event 1 : ", event1, " ", event1.end_time," Event 2: ", event2, " ", event2.start_time)
+            # print("False")
+            return False
+        elif event2.end_time < event1.start_time:
+            # print("Event 1 : ", event1.end_time, " Event 2: ", event2.start_time)
+            # print("False")
+            return False
+        else:
+            # print("True")
+            return True
     else:
-        print("True")
-        return True
-    # else:
-    #     if event1.end_time + travel_time < event2.start_time:
-    #         print("Event 1 : ", event1, " ", event1.end_time, " Travel Time: ", travel_time, " Event 2: ", event2, " ", event2.start_time)
-    #         print("False")
-    #        return False
-    #     elif event2.end_time + travel_time < event1.start_time:
-       #     print("Event 1 : ", event1.end_time, " Travel Time: ", travel_time, " Event 2: ", event2.start_time)
-       #     print("False")
-       #     return False
-     #   else:
-          #  print("Event 1 : ", event1.end_time, " Travel Time: ", travel_time, " Event 2: ", event2.start_time)
-          #  print("True")
-          #  return True
-            # check_conflict_today(event1, event2)
+        if event1.end_time + travel_time < event2.start_time:
+            # print("Event 1 : ", event1, " ", event1.end_time," Event 2: ", event2, " ", event2.start_time)
+            # print("False")
+            return False
+        elif event2.end_time + travel_time < event1.start_time:
+            # print("Event 1 : ", event1.end_time, " Event 2: ", event2.start_time)
+            # print("False")
+            return False
+        else:
+            # print("True")
+            return True
 
 
 # event list is a list of events sorted by end time, event index is the index of the current event in the list
@@ -129,10 +128,6 @@ def closest_non_conflict_index(time_matrix, event_index):
             return curr_index
         curr_index -= 1
     return -1
-
-
-def sort(event_list):
-    weight = 0
 
 
 def compCategory(event, user):
@@ -196,6 +191,7 @@ def sortEventsByTime(event_list):
 def get_schedule(origin, event_list, user):
     events = sortEventsByTime(event_list)
     t = travelTimeMatrix(origin, events)
+    # print("Does this even run")
     n = len(events)
     optimal = [0] * (n + 1)
     opt_list = []
@@ -206,10 +202,10 @@ def get_schedule(origin, event_list, user):
         prev_no_conflict = closest_non_conflict_index(t, i - 1)  # last index where event does not conflict
         prev_no_conflict_event = closest_non_conflict(t, i - 1) # last event with no conflict with index in events
 
-        print("Current index: " + str(i))
-        print("Current event: " + str(events[i - 1]))
-        print("Prev no conflict event: " + str(prev_no_conflict_event))
-        print("Index of prev no conflict: " + str(prev_no_conflict))
+        # print("Current index: " + str(i))
+        # print("Current event: " + str(events[i - 1]))
+        # print("Prev no conflict event: " + str(prev_no_conflict_event))
+        # print("Index of prev no conflict: " + str(prev_no_conflict))
         include_curr = compCategory(events[i - 1], user)
         if prev_no_conflict >= 0:
             include_curr += optimal[prev_no_conflict+1]  # value of including curr
@@ -217,19 +213,19 @@ def get_schedule(origin, event_list, user):
 
 
         exclude_curr = optimal[i - 1]  # value of excluding curr
-        print("Include curr: " + str(include_curr))
-        print("Exclude curr: " + str(exclude_curr))
+        # print("Include curr: " + str(include_curr))
+        # print("Exclude curr: " + str(exclude_curr))
         if include_curr > exclude_curr:
             if prev_no_conflict >= 0:
                 opt_list[i].extend(opt_list[prev_no_conflict+1])
             opt_list[i].append(events[i - 1])
             optimal[i] = include_curr
-            print("INCLUDED")
+            # print("INCLUDED")
         else:
             opt_list[i].extend(opt_list[i - 1])
             optimal[i] = exclude_curr
-            print("EXCLUDED")
-        print("Current optimal: ")
+            # print("EXCLUDED")
+        # print("Current optimal: ")
         print(opt_list[i])
 
     # print("All event lists:")

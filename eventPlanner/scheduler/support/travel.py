@@ -25,14 +25,25 @@ INFI = 10000000
 def get_map_response(start_pos, end_pos):
     base_url = "https://open.mapquestapi.com/directions/v2/route?key="
     locations = "&from=" + start_pos + "&to=" + end_pos
-    key = "JEq6beD60zZZFpjDPAGR9gnuO0k3B0IX"  # TODO: INSERT MAPQUEST API KEY HERE
+    key = "xVp6Qgy7SK7vhjRMGbJw49weeg79JnaT"  # TODO: INSERT MAPQUEST API KEY HERE
     response = requests.get(base_url + key + locations)
+    if response.status_code != 200:
+        print(response.status_code)
+        print("ERROR ISSUE WITH API")
+        return None
+    else:
+        print("All GOOD SERVERS")
     # print("Status code: " + str(response.status_code))
     # print(response.json())
 
     # Return Route object
     # route.Route(json.loads(response.text))
-    dictionary = json.loads(response.text)
+    dictionary = None
+    try:
+        dictionary = json.loads(response.text)
+    except:
+        print("JSON DECODE ERROR WARNING WARNING")
+        return None
 
     # print(dictionary)
     if dictionary['info']['statuscode'] != 0:

@@ -1,4 +1,6 @@
 from ..support import yelp
+from ..support import ticketmaster
+import datetime
 #from ..support import ticketmaster
 
 
@@ -36,13 +38,15 @@ class EventFinder:
         return event_list
 
     def get_ticketmaster_events(self):
-        # TODO: Add ticketmaster implementation
-        return None
+        ticketmaster_access_object = ticketmaster.TicketMaster()
+        ticketmaster_event_list = ticketmaster_access_object.get_events_date(self.location, self.start_time)
+
+        return ticketmaster_event_list
 
     def save_all_events(self):
         event_list = self.get_yelp_events()
-        # TODO: Append events from ticketmaster here
-        # TODO: Check to see if ticketmaster events already exist in event_list
+        ticketmaster_event_list = self.get_ticketmaster_events()
+        for event in ticketmaster_event_list:
+            event_list.append(event)
         for event in event_list:
             event.save()
-

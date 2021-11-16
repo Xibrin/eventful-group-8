@@ -15,14 +15,15 @@ from .support import event_finder
 from .forms import UserForm
 from .support import algorithm
 
+
 def user_view(request):
     if request.user.is_authenticated:
-     return render(request, "scheduler/user.html", context={
+        return render(request, "scheduler/user.html", context={
             "user": request.user,
             "navItems": {
-            "Logout": reverse("logout"),
-        }
-    })
+                "Logout": reverse("logout"),
+            }
+        })
     else:
         return HttpResponseRedirect(reverse("login"))
 
@@ -30,13 +31,13 @@ def user_view(request):
 def login_view(request):
     if request.method == "POST":
         email = request.POST["email"]
-        #username = request.POST["username"]
+        # username = request.POST["username"]
         password = request.POST["password"]
         current_user = authenticate(request, username=email, password=password)
         if current_user:
             login(request, current_user)
             Event.objects.all().delete()
-            #TODO: right now only MD is being input as the location
+            # TODO: right now only MD is being input as the location
             new_event_finder = event_finder.EventFinder(location="MD", start_time=int(
                 parser.parse(datetime.datetime.now().isoformat()).timestamp()))
             new_event_finder.save_all_events()
@@ -79,7 +80,7 @@ def register_view(request):
             password = data.get("password")
             confirm_password = data.get("confirm_password")
             state = data.get("state")
-            #print("Music: " + str(music))
+            # print("Music: " + str(music))
             print("REACHED POST")
             try:
                 current_user = User.objects.create_user(
@@ -88,27 +89,27 @@ def register_view(request):
                     username=email,
                     email=email,
                     password=password,
-                    confirm_password =confirm_password,
-                    music = music,
-                    visual = visual,
-                    performing = performing,
-                    film = film,
-                    lectures = lectures,
-                    fashion = fashion,
-                    food = food,
-                    festivals = festivals,
-                    charity = charity,
-                    sports = sports,
-                    nightlife = nightlife,
-                    family = family,
-                    state = state
+                    confirm_password=confirm_password,
+                    music=music,
+                    visual=visual,
+                    performing=performing,
+                    film=film,
+                    lectures=lectures,
+                    fashion=fashion,
+                    food=food,
+                    festivals=festivals,
+                    charity=charity,
+                    sports=sports,
+                    nightlife=nightlife,
+                    family=family,
+                    state=state
                 )
 
-                if not Event.objects.filter(state).exists():
-                    curr_state = State()
-                    curr_state.state = state
-                    curr_state.save()
-                    current_user.save()
+                # if not Event.objects.filter(state).exists():
+                #     curr_state = State()
+                #     curr_state.state = state
+                #     curr_state.save()
+                #     current_user.save()
             except IntegrityError:
                 return render(request, "scheduler/register.html", context={
                     "invalidMessage": "Email address already in use"
@@ -121,9 +122,8 @@ def register_view(request):
         login(request, current_user)
 
         return render(request, "scheduler/login.html", context={
-             "successMessage": "Successfully created new user"
-         })
-
+            "successMessage": "Successfully created new user"
+        })
 
     else:
         print("Is this working")
@@ -159,6 +159,7 @@ def schedule_view(request):
         })
     return render(request, "scheduler/schedule.html")
 
+
 @login_required
 def events_view(request):
     if request.method == "POST":
@@ -171,7 +172,6 @@ def events_view(request):
         max_commute_time_mins = int(request.POST["maxCommuteTimeMins"])
         cost = request.POST["cost"]
 
-
         events = Event.objects.filter(
             start_time__gte=start_time,
             end_time__lte=end_time,
@@ -181,9 +181,7 @@ def events_view(request):
 
         algorithm.compareDist(address, events)
 
-
         return render(request, "scheduler/events.html", context={
             "events": events
         })
     return render(request, "scheduler/events.html")
-

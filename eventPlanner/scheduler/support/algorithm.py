@@ -3,6 +3,7 @@ from ..models import Event
 from . import travel
 from functools import cmp_to_key
 
+
 # def check_conflict_today(event1, event2):
 #     if event1.end_time < event2.start_time:
 #         return False
@@ -16,9 +17,9 @@ class travelTimeMatrix:
     def __init__(self, origin, events):
         self.num_map = {}
         for i, val in enumerate(events):
-            num_map[val] = i
+            self.num_map[val] = i
 
-        self.time_array = compare_dist(origin, events)
+        self.time_array = self.compare_dist(origin, events)
         self.origin = origin
         self.events = events
 
@@ -45,6 +46,7 @@ class travelTimeMatrix:
         index2 = self.num_map[event2]
         return self.time_array[index1][index2]
 
+
 categoryDict = {
     "music": "music",
     "visual-arts": "visual",
@@ -62,9 +64,9 @@ categoryDict = {
 
 
 def check_conflict(event1, event2, time_matrix):
-    if event1.end_time + time_matrix.get_time(event1,event2) < event2.start_time:
+    if event1.end_time + time_matrix.get_time(event1, event2) < event2.start_time:
         return False
-    elif event2.end_time + time_matrix.get_time(event1,event2) < event1.start_time:
+    elif event2.end_time + time_matrix.get_time(event1, event2) < event1.start_time:
         return False
     else:
         return True
@@ -146,7 +148,6 @@ def compareCost(event1, max_cost):
 # distance[0][1] is travel time between origin to event 1
 # distance[1][0] is travel time between event 1 to origin
 # event_list is all valid events (start, end, state)
-
 
 
 def less_than(event1, event2):

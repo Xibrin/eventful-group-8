@@ -2,6 +2,8 @@ import requests
 import os
 from . import route
 import json
+
+
 # from Project.route import Route
 
 
@@ -25,8 +27,8 @@ def get_map_response(start_pos, end_pos):
     response = requests.get(base_url + key + locations)
     # print(response.json())
 
-    #Return Route object
-    #route.Route(json.loads(response.text))
+    # Return Route object
+    # route.Route(json.loads(response.text))
     dictionary = json.loads(response.text)
 
     if dictionary["route"]:
@@ -34,8 +36,10 @@ def get_map_response(start_pos, end_pos):
     else:
         return dictionary["route"]["time"]
 
+
 def get_travel_time(start_pos, end_pos):
     return get_map_response(start_pos, end_pos)
+
 
 def optimized_directions(location_list):
     base_url = "https://open.mapquestapi.com/directions/v2/optimizedroute?key="
@@ -44,10 +48,10 @@ def optimized_directions(location_list):
     response = requests.get(base_url + key + locations)
     # print(response.json())
 
-    #Return Route object
+    # Return Route object
     return route.Route(json.loads(response.text))
 
-#def get_fuel_cost(self):
+# def get_fuel_cost(self):
 #    # parse Json to get fuel cost
 #    route = self.create_route()
 #    return route.cost

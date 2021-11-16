@@ -179,9 +179,10 @@ def events_view(request):
             state=state
         )
 
+        all_events = algorithm.sortEventsByTime(events)
         # algorithm.compareDist(address, events)
 
         return render(request, "scheduler/events.html", context={
-            "events": events
+            "events": all_events
         })
     return render(request, "scheduler/events.html")

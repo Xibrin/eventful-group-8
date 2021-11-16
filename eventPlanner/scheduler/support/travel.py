@@ -2,7 +2,9 @@ import requests
 import os
 from . import route
 import json
+from datetime import timedelta
 
+INFI = 10000000
 
 # from Project.route import Route
 
@@ -25,22 +27,29 @@ def get_map_response(start_pos, end_pos):
     locations = "&from=" + start_pos + "&to=" + end_pos
     key = "JEq6beD60zZZFpjDPAGR9gnuO0k3B0IX"  # TODO: INSERT MAPQUEST API KEY HERE
     response = requests.get(base_url + key + locations)
+    # print("Status code: " + str(response.status_code))
     # print(response.json())
 
     # Return Route object
     # route.Route(json.loads(response.text))
-    print("Start: " + start_pos + " End: " + end_pos)
     dictionary = json.loads(response.text)
 
-    if dictionary["route"]:
-        print("ROUTE ISSUE")
+    # print(dictionary)
+    if dictionary['info']['statuscode'] != 0:
         return None
     else:
-        return dictionary["route"]["time"]
+        return dictionary['route']
 
 
 def get_travel_time(start_pos, end_pos):
-    return get_map_response(start_pos, end_pos)
+    route = get_map_response(start_pos, end_pos)
+    if route is None:
+        return timedelta(hours=2)
+    else:
+        format = route['formattedTime']
+        time_split = format.split(":")
+        # seconds = time_split[0] * 3600 + time_split[1] * 60 + time_split[2]
+        return timedelta(seconds=int(time_split[2]), minutes=int(time_split[1]), hours=int(time_split[0]))
 
 
 def optimized_directions(location_list):
@@ -49,7 +58,6 @@ def optimized_directions(location_list):
     key = "JEq6beD60zZZFpjDPAGR9gnuO0k3B0IX"  # TODO: INSERT MAPQUEST API KEY HERE
     response = requests.get(base_url + key + locations)
     # print(response.json())
-
     # Return Route object
     return route.Route(json.loads(response.text))
 

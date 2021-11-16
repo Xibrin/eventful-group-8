@@ -54,7 +54,8 @@ class Event(BaseModel):
     # objects = models.Manager()
 
     def __str__(self):
-        return f"{self.name} starting at {self.start_time} costing {self.cost}, ending at {self.end_time}"
+        return f"{self.name}"
+        # return f"{self.name} starting at {self.start_time} costing {self.cost}, ending at {self.end_time}"
 
     def __eq__(self, other):
         return self.name == other.name

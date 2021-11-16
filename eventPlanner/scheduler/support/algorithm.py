@@ -41,13 +41,15 @@ class travelTimeMatrix:
                 distance[i][j] = curr_travel_time
                 distance[j][i] = curr_travel_time
 
-        print("TIME ARRAY:")
-        print(distance)
+        # print("TIME ARRAY:")
+        # print(distance)
         return distance
 
     def get_time(self, event1, event2):
         index1 = self.num_map[event1]
         index2 = self.num_map[event2]
+        print("This is what is in time array: ")
+        print(self.time_array[index1][index2])
         return self.time_array[index1][index2]
 
 
@@ -68,37 +70,58 @@ categoryDict = {
 
 
 def check_conflict(event1, event2, time_matrix):
-    if event1.end_time + time_matrix.get_time(event1, event2) < event2.start_time:
+    # travel_time = time_matrix.get_time(event1,event2)
+
+    if event1.end_time < event2.start_time:
+        print("Event 1 : ", event1, " ", event1.end_time," Event 2: ", event2, " ", event2.start_time)
+        print("False")
         return False
-    elif event2.end_time + time_matrix.get_time(event1, event2) < event1.start_time:
+    elif event2.end_time < event1.start_time:
+        print("Event 1 : ", event1.end_time, " Event 2: ", event2.start_time)
+        print("False")
         return False
     else:
+        print("True")
         return True
-        # check_conflict_today(event1, event2)
+    # else:
+    #     if event1.end_time + travel_time < event2.start_time:
+    #         print("Event 1 : ", event1, " ", event1.end_time, " Travel Time: ", travel_time, " Event 2: ", event2, " ", event2.start_time)
+    #         print("False")
+    #        return False
+    #     elif event2.end_time + travel_time < event1.start_time:
+       #     print("Event 1 : ", event1.end_time, " Travel Time: ", travel_time, " Event 2: ", event2.start_time)
+       #     print("False")
+       #     return False
+     #   else:
+          #  print("Event 1 : ", event1.end_time, " Travel Time: ", travel_time, " Event 2: ", event2.start_time)
+          #  print("True")
+          #  return True
+            # check_conflict_today(event1, event2)
 
 
 # event list is a list of events sorted by end time, event index is the index of the current event in the list
-# def closest_non_conflict(time_matrix, event_index):
-#     curr_index = event_index - 1
-#     event_list = time_matrix.events
-#     e = event_list[event_index]
-#     while curr_index >= 0:
-#         curr_event = event_list[curr_index]
-#         if not check_conflict(curr_event, e, time_matrix):
-#             return curr_event
-#         curr_index -= 1
-#     return None
+def closest_non_conflict(time_matrix, event_index):
+     curr_index = event_index - 1
+     event_list = time_matrix.events
+     e = event_list[event_index]
+     while curr_index >= 0:
+         curr_event = event_list[curr_index]
+         if not check_conflict(curr_event, e, time_matrix):
+             return curr_event
+         curr_index -= 1
+     return None
 
 
 def closest_non_conflict_index(time_matrix, event_index):
-    curr_index = event_index - 1
+
     # event_list = time_matrix.events
     # print("EVENT INDEX: " + str(event_index))
     # print(len(event_list))
     if event_index >= len(time_matrix.events):
         return -1
     # e = event_list[event_index]
-    e = time_matrix.events[event_index]
+    e = time_matrix.events[event_index] #e is the current event; trying to find event immediately before e
+    curr_index = event_index - 1  # start one index before event index
     while curr_index >= 0:
         # curr_event = event_list[curr_index]
         curr_event = time_matrix.events[curr_index]
@@ -115,6 +138,7 @@ def sort(event_list):
 def compCategory(event, user):
     internal_name = event.category
     # internal_name = categoryDict[category_for_dictionary]
+    weight = 5
     if internal_name == 'music':
         weight = user.music
     if internal_name == 'visual-arts':
@@ -180,19 +204,24 @@ def get_schedule(origin, event_list, user):
 
     for i in range(1, n + 1):
         prev_no_conflict = closest_non_conflict_index(t, i - 1)  # last index where event does not conflict
-        # prev_no_conflict_event = closest_non_conflict(t, i - 1) # last event with no conflict
+        prev_no_conflict_event = closest_non_conflict(t, i - 1) # last event with no conflict with index in events
 
         print("Current index: " + str(i))
         print("Current event: " + str(events[i - 1]))
-        # print("Prev no conflict event: " + str(prev_no_conflict_event))
+        print("Prev no conflict event: " + str(prev_no_conflict_event))
+        print("Index of prev no conflict: " + str(prev_no_conflict))
         include_curr = compCategory(events[i - 1], user)
         if prev_no_conflict >= 0:
-            include_curr += optimal[prev_no_conflict]  # value of including curr
+            include_curr += optimal[prev_no_conflict+1]  # value of including curr
+
+
 
         exclude_curr = optimal[i - 1]  # value of excluding curr
+        print("Include curr: " + str(include_curr))
+        print("Exclude curr: " + str(exclude_curr))
         if include_curr > exclude_curr:
             if prev_no_conflict >= 0:
-                opt_list[i].extend(opt_list[prev_no_conflict])
+                opt_list[i].extend(opt_list[prev_no_conflict+1])
             opt_list[i].append(events[i - 1])
             optimal[i] = include_curr
             print("INCLUDED")
@@ -203,9 +232,9 @@ def get_schedule(origin, event_list, user):
         print("Current optimal: ")
         print(opt_list[i])
 
-    print("All event lists:")
-    for val in opt_list:
-        print(val)
+    # print("All event lists:")
+    # for val in opt_list:
+    #     print(val)
     # print(optimal[n])
     # print(opt_list[n])
     return opt_list[n]
